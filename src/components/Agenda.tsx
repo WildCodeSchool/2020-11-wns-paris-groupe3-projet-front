@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { TaskProps } from './FormNewTask';
+import { TaskProps } from './Planning';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';

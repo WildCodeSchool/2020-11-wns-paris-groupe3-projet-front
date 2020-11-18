@@ -1,12 +1,12 @@
 import moment from 'moment';
 import React from 'react';
 
-import { TaskProps } from './Planning';
+import { TaskProps, HandleChange, HandleSubmit } from './Planning';
 
 interface FormProps {
   task: TaskProps;
-  handleChange: any;
-  handleSubmit: any;
+  handleChange: HandleChange;
+  handleSubmit: HandleSubmit;
 }
 
 const FormNewTask = ({ task, handleChange, handleSubmit }: FormProps): JSX.Element => {

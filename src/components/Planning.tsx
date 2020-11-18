@@ -9,6 +9,9 @@ export type TaskProps = {
   title: string;
 };
 
+export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
+export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => void;
+
 const Planning = (): JSX.Element => {
   const [task, setTask] = useState<TaskProps>({
     start: moment().toDate(),
@@ -23,7 +26,7 @@ const Planning = (): JSX.Element => {
     setTask(taskTemp);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>): void => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const eventsTemp: TaskProps[] = [...events];
     eventsTemp.push(task);

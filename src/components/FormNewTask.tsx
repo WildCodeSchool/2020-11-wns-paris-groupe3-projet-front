@@ -20,7 +20,7 @@ const CREATE_TASK = gql`
 `;
 
 const FormNewTask = (): JSX.Element => {
-  const [createTask, { data }] = useMutation(CREATE_TASK);
+  const [createTask] = useMutation(CREATE_TASK);
   const [task, setTask] = useState<TaskProps>({
     title: '',
     start: moment().toDate(),
@@ -39,7 +39,6 @@ const FormNewTask = (): JSX.Element => {
 
   return (
     <div>
-      {data && <p>Task {data.createTask.title} a été ajoutée.</p>}
       <h4>Ajouter un devoir</h4>
       <form onSubmit={handleSubmit}>
         {/* <label>Classe

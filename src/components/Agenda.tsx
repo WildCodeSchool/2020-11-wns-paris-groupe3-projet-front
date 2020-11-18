@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { PlanningProps } from './Planning';
+import { TaskProps } from './Planning';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 
 interface PropsTest {
-  events: PlanningProps[];
+  events: TaskProps[];
 }
 
 const Agenda = ({ events }: PropsTest): JSX.Element => {

@@ -1,43 +1,33 @@
 import moment from 'moment';
 import React from 'react';
 
+import { TaskProps } from './Planning';
+
 interface FormProps {
-  end: Date;
-  start: Date;
-  title: string;
-  setEnd: any;
-  setStart: any;
-  setTitle: any;
+  task: TaskProps;
+  handleChange: any;
   handleSubmit: any;
 }
 
-const FormNewTask = (props: FormProps): JSX.Element => {
+const FormNewTask = ({ task, handleChange, handleSubmit }: FormProps): JSX.Element => {
   return (
     <div>
       <h4>Ajouter un devoir</h4>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {/* <label>Classe
           <input type='text' />
         </label> */}
         <label>
           Nom du devoir
-          <input type="text" value={props.title} onChange={(e) => props.setTitle(e.target.value)} />
+          <input type="text" name="title" value={task.title} onChange={handleChange} />
         </label>
         <label>
           Date de début
-          <input
-            type="date"
-            value={moment(props.start).toString()}
-            onChange={(e) => props.setStart(moment(e.target.value).toDate())}
-          />
+          <input type="date" name="start" value={moment(task.start).toString()} onChange={handleChange} />
         </label>
         <label>
           Date de fin
-          <input
-            type="date"
-            value={moment(props.end).toString()}
-            onChange={(e) => props.setEnd(moment(e.target.value).toDate())}
-          />
+          <input type="date" name="end" value={moment(task.end).toString()} onChange={handleChange} />
         </label>
         <button type="submit">Valider</button>
         <button>Annuler</button>

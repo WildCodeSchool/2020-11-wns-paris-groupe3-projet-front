@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React from 'react';
 
 import { TaskProps, HandleChange, HandleSubmit } from './Planning';
@@ -23,11 +22,11 @@ const FormNewTask = ({ task, handleChange, handleSubmit }: FormProps): JSX.Eleme
         </label>
         <label>
           Date de début
-          <input type="date" name="start" value={moment(task.start).toString()} onChange={handleChange} />
+          <input type="date" name="start" value={task.start.toString()} onChange={handleChange} />
         </label>
         <label>
           Date de fin
-          <input type="date" name="end" value={moment(task.end).toString()} onChange={handleChange} />
+          <input type="date" name="end" value={task.end.toString()} onChange={handleChange} />
         </label>
         <button type="submit">Valider</button>
         <button>Annuler</button>

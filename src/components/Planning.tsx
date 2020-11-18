@@ -25,6 +25,7 @@ const CREATE_TASK = gql`
     }
   }
 `;
+
 export type TaskProps = {
   start: Date;
   end: Date;
@@ -35,7 +36,7 @@ export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
 export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => void;
 
 const Planning = (): JSX.Element => {
-  const { loading, error, data } = useQuery(ALL_TASKS);
+  const { loading, error, data, refetch } = useQuery(ALL_TASKS);
   const [createTask] = useMutation(CREATE_TASK);
 
   const [task, setTask] = useState<TaskProps>({
@@ -52,6 +53,7 @@ const Planning = (): JSX.Element => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     createTask({ variables: { input: task } });
+    refetch();
   };
 
   if (loading) return <p>Loading...</p>;

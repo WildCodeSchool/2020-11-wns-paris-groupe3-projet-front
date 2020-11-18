@@ -1,16 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import moment from 'moment';
 
-import { TaskProps, HandleChange, HandleSubmit } from './Planning';
+export type TaskProps = {
+  start: Date;
+  end: Date;
+  title: string;
+};
 
-interface FormProps {
-  task: TaskProps;
-  handleChange: HandleChange;
-  handleSubmit: HandleSubmit;
-}
+const CREATE_TASK = gql`
+  mutation CreateTask($input: InputTask!) {
+    createTask(input: $input) {
+      id
+      title
+      start
+      end
+    }
+  }
+`;
 
-const FormNewTask = ({ task, handleChange, handleSubmit }: FormProps): JSX.Element => {
+const FormNewTask = (): JSX.Element => {
+  const [createTask, { data }] = useMutation(CREATE_TASK);
+  const [task, setTask] = useState<TaskProps>({
+    title: '',
+    start: moment().toDate(),
+    end: moment().add(1, 'days').toDate(),
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const taskTemp = { ...task, [e.target.name]: e.target.value };
+    setTask(taskTemp);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    createTask({ variables: { input: task } });
+  };
+
   return (
     <div>
+      {data && <p>Task {data.createTask.title} a été ajoutée.</p>}
       <h4>Ajouter un devoir</h4>
       <form onSubmit={handleSubmit}>
         {/* <label>Classe

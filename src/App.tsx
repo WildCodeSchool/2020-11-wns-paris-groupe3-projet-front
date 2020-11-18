@@ -1,14 +1,14 @@
 import React from 'react';
-import Planning from './components/Planning'
+import Planning from './components/Planning';
 
 import './App.css';
 
-function App() {
+const App = (): JSX.Element => {
   return (
     <div className="App">
       <Planning />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { TaskProps, HandleChange, HandleSubmit } from './Planning';
+import { Task, HandleChange, HandleSubmit } from '../types';
 
 interface FormProps {
-  task: TaskProps;
+  task: Task;
   handleChange: HandleChange;
   handleSubmit: HandleSubmit;
 }
@@ -12,9 +12,6 @@ const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Eleme
     <div>
       <h4>Ajouter un devoir</h4>
       <form onSubmit={handleSubmit}>
-        {/* <label>Classe
-          <input type='text' />
-        </label> */}
         <label>
           Nom du devoir
           <input type="text" name="title" value={task.title} onChange={handleChange} />

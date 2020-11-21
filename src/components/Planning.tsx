@@ -1,56 +1,29 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import moment from 'moment';
+
 import Agenda from './Agenda';
 import FormNewTask from './FormNewTask';
 
-const ALL_TASKS = gql`
-  query GetAllTasks {
-    allTasks {
-      id
-      title
-      start
-      end
-    }
-  }
-`;
-
-const CREATE_TASK = gql`
-  mutation CreateTask($input: InputTask!) {
-    createTask(input: $input) {
-      id
-      title
-      start
-      end
-    }
-  }
-`;
-
-export type TaskProps = {
-  start: Date;
-  end: Date;
-  title: string;
-};
-
-export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
-export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => void;
+import { Task, HandleChange, HandleSubmit } from '../types';
+import { ALL_TASKS, CREATE_TASK } from '../queries';
 
 const Planning = (): JSX.Element => {
   const { loading, error, data, refetch } = useQuery(ALL_TASKS);
   const [createTask] = useMutation(CREATE_TASK);
 
-  const [task, setTask] = useState<TaskProps>({
+  const [task, setTask] = useState<Task>({
     title: '',
     start: moment().toDate(),
     end: moment().add(1, 'days').toDate(),
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange: HandleChange = (e) => {
     const taskTemp = { ...task, [e.target.name]: e.target.value };
     setTask(taskTemp);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit: HandleSubmit = (e) => {
     e.preventDefault();
     createTask({ variables: { input: task } });
     refetch();

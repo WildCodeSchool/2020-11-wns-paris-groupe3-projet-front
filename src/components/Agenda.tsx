@@ -1,13 +1,14 @@
 import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { TaskProps } from './Planning';
+
+import { Task } from '../types';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 interface AgendaProps {
-  events: TaskProps[];
+  events: Task[];
 }
 
 const localizer = momentLocalizer(moment);

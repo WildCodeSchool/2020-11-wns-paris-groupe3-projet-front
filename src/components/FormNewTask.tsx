@@ -11,7 +11,7 @@ const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Eleme
   return (
     <div>
       <h4>Ajouter un devoir</h4>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} aria-label="form">
         <label>
           Nom du devoir
           <input type="text" name="title" value={task.title} onChange={handleChange} />

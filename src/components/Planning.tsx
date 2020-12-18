@@ -33,7 +33,7 @@ const Planning = (): JSX.Element => {
   if (error) return <p>Error</p>;
   return (
     <div>
-      <Agenda events={data.allTasks} />
+      <Agenda events={data.tasks} />
       <FormNewTask task={task} handleChange={handleChange} handleSubmit={handleSubmit} />
     </div>
   );

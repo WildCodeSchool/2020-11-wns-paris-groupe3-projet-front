@@ -11,15 +11,15 @@ const ALL_TASKS_SUCCESS_MOCK = {
   },
   result: {
     data: {
-      allTasks: [
+      tasks: [
         {
-          id: '1',
+          _id: '1',
           title: 'Pouet',
           start: '2021-12-09T04:13:28Z',
           end: '2021-08-22T06:57:38Z',
         },
         {
-          id: '2',
+          _id: '2',
           title: 'Pouet Pouet',
           start: '2021-08-22T06:57:38Z',
           end: '2021-08-22T06:57:38Z',

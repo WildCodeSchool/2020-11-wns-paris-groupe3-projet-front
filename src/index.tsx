@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { CssBaseline, ThemeProvider as MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 
 const client = new ApolloClient({
@@ -15,10 +16,12 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </MuiThemeProvider>
     </ApolloProvider>
   </React.StrictMode>,
 

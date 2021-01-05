@@ -8,4 +8,4 @@ RUN npm i
 COPY ./public ./public
 COPY ./src ./src
 
-CMD npm start src/index.tsx
+CMD npm start

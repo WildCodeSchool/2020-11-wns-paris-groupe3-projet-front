@@ -47,6 +47,11 @@
     "prettier:check": "prettier --check .",
     "lint": "eslint ."
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && eslint ."
+    }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -64,5 +69,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^4.3.6",
+    "pretty-quick": "^3.1.0"
   }
 }

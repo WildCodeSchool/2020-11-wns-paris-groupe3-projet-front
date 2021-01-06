@@ -45,11 +45,13 @@
     "eject": "react-scripts eject",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && eslint . && CI=true npm test"
+      "pre-commit": "pretty-quick --staged && npm run lint-fix",
+      "pre-push": "CI=true npm test"
     }
   },
   "eslintConfig": {

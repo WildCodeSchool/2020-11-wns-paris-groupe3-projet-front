@@ -60,7 +60,7 @@ describe('App', () => {
         </MockedProvider>,
       );
 
-      const errorMessage = await waitFor(() => screen.getByText('Error'));
+      const errorMessage = await waitFor(() => screen.getByText('Errors'));
       expect(errorMessage).toBeInTheDocument();
     });
   });

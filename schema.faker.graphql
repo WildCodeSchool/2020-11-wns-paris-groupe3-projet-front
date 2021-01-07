@@ -1,8 +1,8 @@
 type Task {
-  id: ID
-  title: String! @fake(type: jobTitle)
-  start: String! @fake(type: futureDate)
-  end: String! @fake(type: futureDate)
+  id: ID! @fake(type: uuid)
+  title: String! @fake(type: productName)
+  creation_date: String! @fake(type: recentDate)
+  user_id: ID @fake(type: uuid)
 }
 
 type Query {
@@ -11,8 +11,8 @@ type Query {
 
 input InputTask {
   title: String!
-  start: String!
-  end: String!
+  creation_date: String!
+  user_id: ID
 }
 
 type Mutation {

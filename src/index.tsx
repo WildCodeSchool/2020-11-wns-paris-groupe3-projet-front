@@ -8,7 +8,7 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import theme from './theme';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
+  uri: process.env.REACT_APP_SERVER_URL,
   cache: new InMemoryCache(),
 });
 

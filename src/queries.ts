@@ -21,3 +21,12 @@ export const CREATE_TASK = gql`
     }
   }
 `;
+
+export const CREATE_UPLOAD_FILE_TEST = gql`
+  mutation CreateUploadFileTest($input: InputUploadFileTest!) {
+    createUploadFileTest(input: $input) {
+      _id
+      url
+    }
+  }
+`;

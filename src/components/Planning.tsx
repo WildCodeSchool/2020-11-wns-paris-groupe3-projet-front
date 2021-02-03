@@ -44,8 +44,6 @@ const Planning = (): JSX.Element => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
   return (
     <div>
       <FormNewTask task={task} handleChange={handleChange} handleSubmit={handleSubmit} />

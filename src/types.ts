@@ -1,8 +1,7 @@
 // Objects
 export type Task = {
-  start: Date;
-  end: Date;
-  title: string;
+  taskname: string;
+  url: string;
 };
 
 // Functions

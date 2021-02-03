@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Task, HandleChange, HandleSubmit } from '../types';
 
 interface FormProps {
@@ -10,22 +11,17 @@ interface FormProps {
 const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Element => {
   return (
     <div>
-      <h4>Ajouter un devoir</h4>
-      <form onSubmit={handleSubmit} aria-label="form">
+      <h1>Upload</h1>
+      <form onSubmit={handleSubmit}>
         <label>
           Nom du devoir
-          <input type="text" name="title" value={task.title} onChange={handleChange} />
+          <input type="text" name="taskname" value={task.taskname} onChange={handleChange} />
         </label>
+        Uploader un devoir
         <label>
-          Date de début
-          <input type="date" name="start" value={task.start.toString()} onChange={handleChange} />
+          <input type="file" name="url" onChange={handleChange} />
         </label>
-        <label>
-          Date de fin
-          <input type="date" name="end" value={task.end.toString()} onChange={handleChange} />
-        </label>
-        <button type="submit">Valider</button>
-        <button>Annuler</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

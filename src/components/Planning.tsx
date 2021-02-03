@@ -1,39 +1,53 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import moment from 'moment';
+import { useMutation } from '@apollo/client';
 
-import Agenda from './Agenda';
 import FormNewTask from './FormNewTask';
 
 import { Task, HandleChange, HandleSubmit } from '../types';
-import { ALL_TASKS, CREATE_TASK } from '../queries';
+import { CREATE_TASK } from '../queries';
 
 const Planning = (): JSX.Element => {
-  const { loading, error, data, refetch } = useQuery(ALL_TASKS);
-  const [createTask] = useMutation(CREATE_TASK);
-
   const [task, setTask] = useState<Task>({
-    title: '',
-    start: moment().toDate(),
-    end: moment().add(1, 'days').toDate(),
+    taskname: '',
+    url: '',
   });
 
-  const handleChange: HandleChange = (e) => {
-    const taskTemp = { ...task, [e.target.name]: e.target.value };
-    setTask(taskTemp);
+  const [createTask] = useMutation(CREATE_TASK);
+
+  const handlePreviewFile = (file: Blob) => {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const result = reader.result;
+      if (typeof result === 'string') {
+        setTask({ ...task, url: result });
+      }
+    };
   };
 
-  const handleSubmit: HandleSubmit = (e) => {
+  const handleChange: HandleChange = (e) => {
     e.preventDefault();
-    createTask({ variables: { input: task } });
-    refetch();
+    if (e.target.name === 'taksname') {
+      setTask({ ...task, taskname: e.target.value });
+    }
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    handlePreviewFile(file);
+  };
+
+  const handleSubmit: HandleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createTask({ variables: { input: task } });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
   return (
     <div>
-      <Agenda events={data.tasks} />
       <FormNewTask task={task} handleChange={handleChange} handleSubmit={handleSubmit} />
     </div>
   );

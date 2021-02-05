@@ -37,7 +37,7 @@ const Planning = (): JSX.Element => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: '.pdf',
+    accept: '.pdf, .doc, .docx',
     multiple: false,
   });
 

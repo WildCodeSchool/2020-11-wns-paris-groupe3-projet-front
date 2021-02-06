@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
 
-import FormNewTask from './FormNewTask';
+import FormUploadFile from './FormUploadFile';
 
 import { Task, HandleChange, HandleSubmit } from '../types';
 import { CREATE_TASK } from '../queries';
@@ -10,7 +10,6 @@ import { CREATE_TASK } from '../queries';
 const Planning = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
   const [error, setError] = useState(false);
   const [task, setTask] = useState<Task>({
     taskname: '',
@@ -49,9 +48,7 @@ const Planning = (): JSX.Element => {
     setError(false);
     try {
       await createTask({ variables: { input: task } });
-      console.log(task);
       setIsLoading(false);
-      setIsUploaded(true);
       setTask({ taskname: '', url: '' });
     } catch (err) {
       setIsLoading(false);
@@ -62,12 +59,11 @@ const Planning = (): JSX.Element => {
 
   return (
     <div>
-      <FormNewTask
-        task={task}
+      <FormUploadFile
+        file={task}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
-        isUploaded={isUploaded}
         error={error}
         getRootProps={getRootProps}
         getInputProps={getInputProps}

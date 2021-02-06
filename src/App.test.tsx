@@ -46,7 +46,7 @@ describe('NewTask', () => {
         </MockedProvider>,
       );
 
-      const textInput = screen.getByLabelText('Titre du devoir');
+      const textInput = screen.getByText('Titre du devoir');
       expect(textInput).toBeInTheDocument();
     });
 

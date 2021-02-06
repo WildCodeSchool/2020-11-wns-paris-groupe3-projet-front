@@ -10,6 +10,8 @@ import { CREATE_TASK } from '../queries';
 const Planning = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [error, setError] = useState(false);
   const [task, setTask] = useState<Task>({
     taskname: '',
     url: '',
@@ -44,11 +46,16 @@ const Planning = (): JSX.Element => {
   const handleSubmit: HandleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(false);
     try {
       await createTask({ variables: { input: task } });
       console.log(task);
       setIsLoading(false);
+      setIsUploaded(true);
+      setTask({ taskname: '', url: '' });
     } catch (err) {
+      setIsLoading(false);
+      setError(true);
       console.log(err);
     }
   };
@@ -60,6 +67,8 @@ const Planning = (): JSX.Element => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isLoading={isLoading}
+        isUploaded={isUploaded}
+        error={error}
         getRootProps={getRootProps}
         getInputProps={getInputProps}
         isDragActive={isDragActive}

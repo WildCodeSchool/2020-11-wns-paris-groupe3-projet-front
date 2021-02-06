@@ -8,8 +8,18 @@ type DropZoneProps = {
   hasFile: boolean;
 };
 
+export const Container = styled.p`
+  margin-top: 1rem;
+`;
+
+export const TextHelper = styled.p`
+  margin: 0 0 1rem 0;
+  font-size: 0.7rem;
+  font-style: italic;
+  opacity: 0.5;
+`;
+
 export const DropZone = styled.div<DropZoneProps>`
-  margin: 50px auto;
   border-radius: 5px;
   outline: none;
   cursor: pointer;

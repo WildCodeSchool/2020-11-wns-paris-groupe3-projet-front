@@ -24,9 +24,9 @@ const FormUploadFile = ({
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} aria-label="form">
         {fileKey === 'taskname' && (
-          <TextInput id="outlined-basic" label="Titre du devoir" variant="outlined" onChange={handleChange} />
+          <TextInput id="outlined-basic" label="Titre du devoir" variant="outlined" onChange={handleChange} required />
         )}
         <UploadBox
           file={file}
@@ -46,8 +46,8 @@ const FormUploadFile = ({
             Créer
           </Button>
         )}
+        {error && <Error>Quelque chose s'est mal passé. Veuillez recommencer.</Error>}
       </Form>
-      {error && <Error>Quelque chose s'est mal passé. Veuillez recommencer.</Error>}
     </div>
   );
 };

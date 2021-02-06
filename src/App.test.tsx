@@ -2,79 +2,78 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import App from './App';
-import { ALL_TASKS } from './queries';
+import NewTask from './components/NewTask';
 
-const ALL_TASKS_SUCCESS_MOCK = {
+import { CREATE_TASK } from './queries';
+
+const NEW_TASK_SUCCESS_MOCK = {
   request: {
-    query: ALL_TASKS,
+    query: CREATE_TASK,
+    variables: {
+      taskname: 'new taskname',
+      url: 'myurl',
+    },
   },
   result: {
     data: {
-      tasks: [
-        {
-          _id: '1',
-          title: 'Pouet',
-          start: '2021-12-09T04:13:28Z',
-          end: '2021-08-22T06:57:38Z',
-        },
-        {
-          _id: '2',
-          title: 'Pouet Pouet',
-          start: '2021-08-22T06:57:38Z',
-          end: '2021-08-22T06:57:38Z',
-        },
-      ],
+      createTask: {
+        taskname: 'new taskname',
+        url: 'myurl',
+        __typename: 'Task',
+        _id: '1',
+      },
     },
   },
 };
 
-const ALL_TASKS_ERROR_MOCK = {
-  request: {
-    query: ALL_TASKS,
-  },
-  error: {
-    name: 'GRAPHQL_VALIDATION_FAILED',
-    message: 'Cannot query field "taks" on type "Query". Did you mean "tasks"?',
-  },
-};
-
-describe('App', () => {
-  describe('while fetching tasks', () => {
-    it('renders loading', () => {
+describe('NewTask', () => {
+  describe('When on creation page', () => {
+    it('should render header', () => {
       render(
-        <MockedProvider mocks={[ALL_TASKS_SUCCESS_MOCK]} addTypename={false}>
-          <App />
+        <MockedProvider>
+          <NewTask />
         </MockedProvider>,
       );
 
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      const header = screen.getByText('Créer un nouveau devoir');
+      expect(header).toBeInTheDocument();
     });
-  });
 
-  describe('when fetching tasks failed', () => {
-    it('renders error', async () => {
+    it('should render text input label', () => {
       render(
-        <MockedProvider mocks={[ALL_TASKS_ERROR_MOCK]} addTypename={false}>
-          <App />
+        <MockedProvider>
+          <NewTask />
         </MockedProvider>,
       );
 
-      const errorMessage = await waitFor(() => screen.getByText('Error'));
-      expect(errorMessage).toBeInTheDocument();
+      const textInput = screen.getByLabelText('Titre du devoir');
+      expect(textInput).toBeInTheDocument();
+    });
+
+    it('should render upload box text', () => {
+      render(
+        <MockedProvider>
+          <NewTask />
+        </MockedProvider>,
+      );
+
+      const textInput = screen.getByText('Glisser votre devoir ici, ou cliquer pour le sélectionner. *');
+      expect(textInput).toBeInTheDocument();
     });
   });
 
-  describe('when fetching tasks succeeded', () => {
-    it('renders calendar with tasks', async () => {
+  describe('when creating task succeeded', () => {
+    it('should render the form and the submit button', async () => {
       render(
-        <MockedProvider mocks={[ALL_TASKS_SUCCESS_MOCK]} addTypename={false}>
-          <App />
+        <MockedProvider mocks={[NEW_TASK_SUCCESS_MOCK]} addTypename={false}>
+          <NewTask />
         </MockedProvider>,
       );
 
       const form = await waitFor(() => screen.getByRole('form'));
+      const button = await waitFor(() => screen.getByRole('button'));
       expect(form).toBeInTheDocument();
+      expect(button).toBeInTheDocument();
     });
   });
 });

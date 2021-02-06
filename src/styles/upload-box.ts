@@ -8,7 +8,7 @@ type DropZoneProps = {
   hasFile: boolean;
 };
 
-export const Container = styled.p`
+export const Container = styled.div`
   margin-top: 1rem;
 `;
 

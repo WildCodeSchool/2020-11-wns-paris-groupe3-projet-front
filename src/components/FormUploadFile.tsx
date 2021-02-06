@@ -1,23 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
 
 import UploadBox from './UploadBox';
-import Header from './Header';
 
 import { FormProps } from '../types';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    submit: {
-      backgroundColor: `${theme.palette.primary.main}`,
-    },
-  }),
-);
+import { TextInput, Form, Error } from '../styles/form';
 
 const FormUploadFile = ({
   file,
@@ -29,15 +20,13 @@ const FormUploadFile = ({
   getInputProps,
   isDragActive,
 }: FormProps): JSX.Element => {
-  const classes = useStyles();
   const fileKey = Object.keys(file)[0];
 
   return (
     <div>
-      <Header label="Créer un nouveau devoir" />
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         {fileKey === 'taskname' && (
-          <TextField id="outlined-basic" label="Titre du devoir" variant="outlined" onChange={handleChange} required />
+          <TextInput id="outlined-basic" label="Titre du devoir" variant="outlined" onChange={handleChange} />
         )}
         <UploadBox
           file={file}
@@ -53,13 +42,12 @@ const FormUploadFile = ({
             type="submit"
             startIcon={<SaveOutlinedIcon />}
             disabled={file.url.length === 0 || (fileKey === 'taskname' && fileKey.length === 0)}
-            className={classes.submit}
           >
             Créer
           </Button>
         )}
-      </form>
-      {error && <p>Quelque chose s'est mal passé. Veuillez recommencer.</p>}
+      </Form>
+      {error && <Error>Quelque chose s'est mal passé. Veuillez recommencer.</Error>}
     </div>
   );
 };

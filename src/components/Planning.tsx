@@ -24,15 +24,19 @@ const Planning = (): JSX.Element => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const file = acceptedFiles[0];
-      const reader: FileReader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const result = reader.result;
-        if (typeof result === 'string') {
-          setTask({ ...task, url: result });
-        }
-      };
+      try {
+        const file = acceptedFiles[0];
+        const reader: FileReader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          const result = reader.result;
+          if (typeof result === 'string') {
+            setTask({ ...task, url: result });
+          }
+        };
+      } catch (err) {
+        console.log(err);
+      }
     },
     [task],
   );

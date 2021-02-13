@@ -1,8 +1,17 @@
 // Objects
 export type Task = {
-  start: Date;
-  end: Date;
-  title: string;
+  taskname: string;
+  url: string;
+};
+
+export type Classroom = {
+  classname: string;
+  users: string[];
+};
+
+export type TaskAssignation = {
+  task: string;
+  classroom: string;
 };
 
 // Functions

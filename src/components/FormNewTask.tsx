@@ -1,16 +1,16 @@
 import React from 'react';
 import { Task, HandleChange, HandleSubmit } from '../types';
 
-interface FormProps {
-  task: Task;
-  handleChange: HandleChange;
-  handleSubmit: HandleSubmit;
-}
+// interface FormProps {
+//   task: Task;
+//   handleChange: HandleChange;
+//   handleSubmit: HandleSubmit;
+// }
 
-const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Element => {
+const FormNewTask = (): JSX.Element => {
   return (
     <div>
-      <h4>Ajouter un devoir</h4>
+      {/* <h4>Ajouter un devoir</h4>
       <form onSubmit={handleSubmit} aria-label="form">
         <label>
           Nom du devoir
@@ -26,7 +26,7 @@ const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Eleme
         </label>
         <button type="submit">Valider</button>
         <button>Annuler</button>
-      </form>
+      </form> */}
     </div>
   );
 };

@@ -13,6 +13,7 @@ export const Error = styled.li`
 
 export const TextInput = styled(TextField)`
   width: 500px;
+  margin: 0.5rem 0 0.5rem 0;
 `;
 
 export const ButtonChangeForm = styled.button`

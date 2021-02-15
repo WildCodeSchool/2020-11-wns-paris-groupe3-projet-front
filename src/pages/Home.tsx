@@ -17,10 +17,11 @@ const Home = ({ history }: HistoryType): JSX.Element => {
 
   return (
     <div>
-      {alreadyRegister ? <Login history={history} /> : <Register history={history} />}
+      <h1>{alreadyRegister ? 'Connexion' : 'Inscription'}</h1>
       <ButtonChangeForm type="button" onClick={displayForm}>
         {alreadyRegister ? 'Pas encore inscrit ?' : 'Déjà inscrit ?'}
       </ButtonChangeForm>
+      {alreadyRegister ? <Login history={history} /> : <Register history={history} />}
     </div>
   );
 };

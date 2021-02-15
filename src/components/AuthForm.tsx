@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useMutation } from '@apollo/client';
 
 import TextField from '@material-ui/core/TextField';
@@ -6,8 +6,10 @@ import Button from '@material-ui/core/Button';
 
 import { HandleChange, HandleSubmit } from '../types';
 import { LOGIN_USER } from '../queries';
+import { UserContext } from '../context/UserContext';
 
 const AuthForm = ({ history }: any): JSX.Element => {
+  const context = useContext(UserContext);
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -16,9 +18,8 @@ const AuthForm = ({ history }: any): JSX.Element => {
 
   const [login] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
-      localStorage.getItem('jwtToken');
+      context.loginData(userData);
       history.push('/planning');
-      console.log(userData);
     },
     variables: values,
     onError(err) {

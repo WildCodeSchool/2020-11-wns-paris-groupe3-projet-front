@@ -11,6 +11,10 @@ export type HistoryType = {
   history: History<LocationState>;
 };
 
+export type ErrorType = {
+  errors: { [key: string]: string };
+};
+
 // Functions
 export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
 export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => void;

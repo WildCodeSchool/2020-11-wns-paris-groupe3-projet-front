@@ -1,44 +1,26 @@
-import React, { useState, useContext } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 
-import { HandleChange, HandleSubmit } from '../types';
-import { LOGIN_USER } from '../queries';
-import { UserContext } from '../context/UserContext';
+import { OnClick, HistoryType } from '../types';
 
 import Login from '../components/Login';
+import Register from '../components/Register';
 
-const Home = ({ history }: RouteComponentProps): JSX.Element => {
-  const context = useContext(UserContext);
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
-  const [errors, setErrors] = useState({});
+import { ButtonChangeForm } from '../styles/auth-form';
 
-  const [login] = useMutation(LOGIN_USER, {
-    update(_, { data: { login: userData } }) {
-      context.loginData(userData);
-      history.push('/planning');
-    },
-    variables: values,
-    onError(err) {
-      setErrors(err.graphQLErrors[0].extensions?.errors);
-    },
-  });
+const Home = ({ history }: HistoryType): JSX.Element => {
+  const [alreadyRegister, setAlreadyRegister] = useState(true);
 
-  const onChange: HandleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit: HandleSubmit = (e) => {
+  const displayForm: OnClick = (e) => {
     e.preventDefault();
-    setErrors({});
-    login();
+    setAlreadyRegister(!alreadyRegister);
   };
+
   return (
     <div>
-      <Login onSubmit={onSubmit} onChange={onChange} errors={errors} />
+      {alreadyRegister ? <Login history={history} /> : <Register history={history} />}
+      <ButtonChangeForm type="button" onClick={displayForm}>
+        {alreadyRegister ? 'Pas encore inscrit ?' : 'Déjà inscrit ?'}
+      </ButtonChangeForm>
     </div>
   );
 };

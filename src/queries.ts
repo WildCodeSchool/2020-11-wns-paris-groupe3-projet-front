@@ -34,3 +34,16 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const REGISTER_USER = gql`
+  mutation register($input: InputRegister!) {
+    register(input: $input) {
+      _id
+      firstname
+      lastname
+      email
+      creation_date
+      token
+    }
+  }
+`;

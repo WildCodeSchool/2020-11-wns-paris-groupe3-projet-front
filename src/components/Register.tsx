@@ -44,15 +44,30 @@ const Register = ({ history }: HistoryType): JSX.Element => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <TextInput id="outlined-basic" label="Prénom" variant="outlined" name="firstname" onChange={onChange} />
-      <TextInput id="outlined-basic" label="Nom" variant="outlined" name="lastname" onChange={onChange} />
-      <TextInput id="outlined-basic" label="Email" variant="outlined" name="email" onChange={onChange} />
-      <TextInput id="outlined-basic" label="Mot de passe" variant="outlined" name="password" onChange={onChange} />
+      <TextInput
+        id="outlined-basic"
+        label="Prénom"
+        variant="outlined"
+        name="firstname"
+        type="text"
+        onChange={onChange}
+      />
+      <TextInput id="outlined-basic" label="Nom" variant="outlined" name="lastname" type="text" onChange={onChange} />
+      <TextInput id="outlined-basic" label="Email" variant="outlined" name="email" type="email" onChange={onChange} />
+      <TextInput
+        id="outlined-basic"
+        label="Mot de passe"
+        variant="outlined"
+        name="password"
+        type="password"
+        onChange={onChange}
+      />
       <TextInput
         id="outlined-basic"
         label="Confirmation du mot de passe"
         variant="outlined"
         name="confirmPassword"
+        type="password"
         onChange={onChange}
       />
       <Button variant="contained" color="primary" type="submit">

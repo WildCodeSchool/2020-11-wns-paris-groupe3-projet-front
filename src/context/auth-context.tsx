@@ -3,21 +3,20 @@ import jwtDecode from 'jwt-decode';
 
 type MyToken = {
   exp: string;
-  _id: number;
-  creation_date: string;
+  id: string;
   email: string;
   firstname: string;
   lastname: string;
-  token: string;
 };
 
 type AuthState = {
-  _id: number;
-  creation_date: string;
-  email: string;
-  firstname: string;
-  lastname: string;
-  token: string;
+  user: {
+    id: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    token: string;
+  };
 };
 
 type AuthStateProps = {
@@ -37,21 +36,31 @@ type ContextProps = {
 const AuthContext = createContext({} as ContextProps);
 
 let initialState = {
-  _id: 0,
-  creation_date: '',
-  email: '',
-  firstname: '',
-  lastname: '',
-  token: '',
+  user: {
+    id: '',
+    email: '',
+    firstname: '',
+    lastname: '',
+    token: '',
+  },
 };
 
 if (localStorage.getItem('jwtToken')) {
+  const token = localStorage.getItem('jwtToken') || '';
   const decodedToken = jwtDecode<MyToken>(localStorage.getItem('jwtToken') || '{}');
 
   if (parseInt(decodedToken.exp) * 1000 < Date.now()) {
     localStorage.removeItem('jwtToken');
   } else {
-    initialState = decodedToken;
+    initialState = {
+      user: {
+        id: decodedToken.id,
+        email: decodedToken.email,
+        firstname: decodedToken.firstname,
+        lastname: decodedToken.lastname,
+        token: token,
+      },
+    };
   }
 }
 
@@ -60,22 +69,24 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     case 'LOGIN':
       return {
         ...state,
-        _id: action.payload._id,
-        creation_date: action.payload.creation_date,
-        email: action.payload.email,
-        firstname: action.payload.firstname,
-        lastname: action.payload.lastname,
-        token: action.payload.token,
+        user: {
+          id: action.payload.user.id,
+          email: action.payload.user.email,
+          firstname: action.payload.user.firstname,
+          lastname: action.payload.user.lastname,
+          token: action.payload.user.token,
+        },
       };
     case 'LOGOUT':
       return {
         ...state,
-        _id: 0,
-        creation_date: '',
-        email: '',
-        firstname: '',
-        lastname: '',
-        token: '',
+        user: {
+          id: '',
+          email: '',
+          firstname: '',
+          lastname: '',
+          token: '',
+        },
       };
     default:
       return state;
@@ -86,7 +97,7 @@ const AuthProvider = ({ children }: AuthStateProps): JSX.Element => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const loginData = (user: AuthState) => {
-    localStorage.setItem('jwtToken', user.token);
+    localStorage.setItem('jwtToken', user.user.token);
     dispatch({
       type: 'LOGIN',
       payload: user,

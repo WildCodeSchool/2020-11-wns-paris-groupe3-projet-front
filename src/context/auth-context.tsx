@@ -34,6 +34,27 @@ type ContextProps = {
   };
 };
 
+const AuthContext = createContext({} as ContextProps);
+
+let initialState = {
+  _id: 0,
+  creation_date: '',
+  email: '',
+  firstname: '',
+  lastname: '',
+  token: '',
+};
+
+if (localStorage.getItem('jwtToken')) {
+  const decodedToken = jwtDecode<MyToken>(localStorage.getItem('jwtToken') || '{}');
+
+  if (parseInt(decodedToken.exp) * 1000 < Date.now()) {
+    localStorage.removeItem('jwtToken');
+  } else {
+    initialState = decodedToken;
+  }
+}
+
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case 'LOGIN':
@@ -60,27 +81,6 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
       return state;
   }
 };
-
-let initialState = {
-  _id: 0,
-  creation_date: '',
-  email: '',
-  firstname: '',
-  lastname: '',
-  token: '',
-};
-
-if (localStorage.getItem('jwtToken')) {
-  const decodedToken = jwtDecode<MyToken>(localStorage.getItem('jwtToken') || '{}');
-
-  if (parseInt(decodedToken.exp) * 1000 < Date.now()) {
-    localStorage.removeItem('jwtToken');
-  } else {
-    initialState = decodedToken;
-  }
-}
-
-const AuthContext = createContext({} as ContextProps);
 
 const AuthProvider = ({ children }: AuthStateProps): JSX.Element => {
   const [state, dispatch] = useReducer(authReducer, initialState);

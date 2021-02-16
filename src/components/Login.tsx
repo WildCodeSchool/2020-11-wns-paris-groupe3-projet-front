@@ -41,15 +41,8 @@ const Login = ({ history }: HistoryType): JSX.Element => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <TextInput id="outlined-basic" label="Email" variant="outlined" name="email" type="email" onChange={onChange} />
-      <TextInput
-        id="outlined-basic"
-        label="Mot de passe"
-        variant="outlined"
-        name="password"
-        type="password"
-        onChange={onChange}
-      />
+      <TextInput label="Email" variant="outlined" name="email" type="email" onChange={onChange} />
+      <TextInput label="Mot de passe" variant="outlined" name="password" type="password" onChange={onChange} />
       <Button variant="contained" color="primary" type="submit">
         Connexion
       </Button>

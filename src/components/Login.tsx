@@ -4,14 +4,14 @@ import { useMutation } from '@apollo/client';
 
 import { HandleChange, HandleSubmit, HistoryType } from '../types';
 import { LOGIN_USER } from '../queries';
-import { UserContext } from '../context/UserContext';
+import { AuthContext } from '../context/auth-context';
 
 import ErrorList from './ErrorList';
 
 import { TextInput, Form } from '../styles/auth-form';
 
 const Login = ({ history }: HistoryType): JSX.Element => {
-  const context = useContext(UserContext);
+  const { dispatch } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
     email: '',
@@ -20,12 +20,12 @@ const Login = ({ history }: HistoryType): JSX.Element => {
 
   const [login] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
-      context.loginData(userData);
+      dispatch.loginData(userData);
       history.push('/planning');
     },
     variables: values,
     onError(err) {
-      setErrors(err.graphQLErrors[0].extensions?.errors);
+      setErrors(err.graphQLErrors[0].extensions?.errors || err);
     },
   });
 

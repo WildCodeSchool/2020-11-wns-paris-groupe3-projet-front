@@ -4,14 +4,14 @@ import { useMutation } from '@apollo/client';
 
 import { HandleChange, HandleSubmit, HistoryType } from '../types';
 import { REGISTER_USER } from '../queries';
-import { UserContext } from '../context/UserContext';
+import { AuthContext } from '../context/auth-context';
 
 import ErrorList from './ErrorList';
 
 import { TextInput, Form } from '../styles/auth-form';
 
 const Register = ({ history }: HistoryType): JSX.Element => {
-  const context = useContext(UserContext);
+  const { dispatch } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
     firstname: '',
@@ -23,8 +23,7 @@ const Register = ({ history }: HistoryType): JSX.Element => {
 
   const [register] = useMutation(REGISTER_USER, {
     update(_, { data: { register: userData } }) {
-      console.log(userData);
-      context.loginData(userData);
+      dispatch.loginData(userData);
       history.push('/planning');
     },
     variables: { input: values },

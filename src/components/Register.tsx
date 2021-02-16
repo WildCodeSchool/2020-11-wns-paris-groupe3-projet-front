@@ -56,7 +56,7 @@ const Register = ({ history }: HistoryType): JSX.Element => {
         onChange={onChange}
       />
       <Button variant="contained" color="primary" type="submit">
-        S&apos;inscrire
+        Inscription
       </Button>
       {Object.keys(errors).length > 0 && <ErrorList errors={errors} />}
     </Form>

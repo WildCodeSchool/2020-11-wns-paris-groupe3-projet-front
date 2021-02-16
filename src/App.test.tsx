@@ -1,80 +1,41 @@
 import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { useHistory } from 'react-router-dom';
 
-import App from './App';
-import { ALL_TASKS } from './queries';
+import Login from './components/Login';
+import Register from './components/Register';
 
-const ALL_TASKS_SUCCESS_MOCK = {
-  request: {
-    query: ALL_TASKS,
-  },
-  result: {
-    data: {
-      tasks: [
-        {
-          _id: '1',
-          title: 'Pouet',
-          start: '2021-12-09T04:13:28Z',
-          end: '2021-08-22T06:57:38Z',
-        },
-        {
-          _id: '2',
-          title: 'Pouet Pouet',
-          start: '2021-08-22T06:57:38Z',
-          end: '2021-08-22T06:57:38Z',
-        },
-      ],
-    },
-  },
-};
+const mockHistoryPush = jest.fn();
 
-const ALL_TASKS_ERROR_MOCK = {
-  request: {
-    query: ALL_TASKS,
-  },
-  error: {
-    name: 'GRAPHQL_VALIDATION_FAILED',
-    message: 'Cannot query field "taks" on type "Query". Did you mean "tasks"?',
-  },
-};
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
-describe('App', () => {
-  describe('while fetching tasks', () => {
-    it('renders loading', () => {
+describe('Home', () => {
+  describe('if new user', () => {
+    it('renders register form', () => {
+      const historyMock = useHistory();
       render(
-        <MockedProvider mocks={[ALL_TASKS_SUCCESS_MOCK]} addTypename={false}>
-          <App />
+        <MockedProvider>
+          <Register history={historyMock} />
         </MockedProvider>,
       );
-
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getByText('Inscription')).toBeInTheDocument();
     });
   });
 
-  describe('when fetching tasks failed', () => {
-    it('renders error', async () => {
+  describe('if already registered user', () => {
+    it('renders register form', () => {
+      const historyMock = useHistory();
       render(
-        <MockedProvider mocks={[ALL_TASKS_ERROR_MOCK]} addTypename={false}>
-          <App />
+        <MockedProvider>
+          <Login history={historyMock} />
         </MockedProvider>,
       );
-
-      const errorMessage = await waitFor(() => screen.getByText('Error'));
-      expect(errorMessage).toBeInTheDocument();
-    });
-  });
-
-  describe('when fetching tasks succeeded', () => {
-    it('renders calendar with tasks', async () => {
-      render(
-        <MockedProvider mocks={[ALL_TASKS_SUCCESS_MOCK]} addTypename={false}>
-          <App />
-        </MockedProvider>,
-      );
-
-      const form = await waitFor(() => screen.getByRole('form'));
-      expect(form).toBeInTheDocument();
+      expect(screen.getByText('Connexion')).toBeInTheDocument();
     });
   });
 });

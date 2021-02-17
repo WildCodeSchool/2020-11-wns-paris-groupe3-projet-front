@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import moment from 'moment';
 
-import Agenda from './Agenda';
+import Calendar from './Calendar';
 import FormNewTask from './FormNewTask';
 
 import { Task, HandleChange, HandleSubmit } from '../types';
@@ -13,9 +12,8 @@ const Planning = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);
 
   const [task, setTask] = useState<Task>({
-    title: '',
-    start: moment().toDate(),
-    end: moment().add(1, 'days').toDate(),
+    taskname: '',
+    url: '',
   });
 
   const handleChange: HandleChange = (e) => {
@@ -33,7 +31,7 @@ const Planning = (): JSX.Element => {
   if (error) return <p>Error</p>;
   return (
     <div>
-      <Agenda events={data.tasks} />
+      <Calendar events={data.tasks} />
       <FormNewTask task={task} handleChange={handleChange} handleSubmit={handleSubmit} />
     </div>
   );

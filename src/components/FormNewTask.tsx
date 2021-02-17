@@ -14,15 +14,11 @@ const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Eleme
       <form onSubmit={handleSubmit} aria-label="form">
         <label>
           Nom du devoir
-          <input type="text" name="title" value={task.title} onChange={handleChange} />
+          <input type="text" name="title" value={task.taskname} onChange={handleChange} />
         </label>
         <label>
-          Date de début
-          <input type="date" name="start" value={task.start.toString()} onChange={handleChange} />
-        </label>
-        <label>
-          Date de fin
-          <input type="date" name="end" value={task.end.toString()} onChange={handleChange} />
+          Fichier
+          <input type="date" name="start" value={task.url} onChange={handleChange} />
         </label>
         <button type="submit">Valider</button>
         <button>Annuler</button>

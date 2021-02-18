@@ -1,28 +1,47 @@
 import React from 'react';
-import { Task, HandleChange, HandleSubmit } from '../types';
+import { Task, TaskAssignation, Classroom, HandleChange, HandleSubmit } from '../types';
+
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 interface FormProps {
-  task: Task;
+  tasks: Task[];
+  assignations: TaskAssignation[];
+  classrooms: Classroom[];
   handleChange: HandleChange;
   handleSubmit: HandleSubmit;
 }
 
-const FormNewTask = ({ task, handleSubmit, handleChange }: FormProps): JSX.Element => {
+const FormNewTask = ({ tasks, assignations, classrooms, handleSubmit, handleChange }: FormProps): JSX.Element => {
   return (
     <div>
-      <h4>Ajouter un devoir</h4>
+      <h4>Assigner un devoir</h4>
       <form onSubmit={handleSubmit} aria-label="form">
-        <label>
-          Nom du devoir
-          <input type="text" name="title" value={task.taskname} onChange={handleChange} />
-        </label>
-        <label>
-          Fichier
-          <input type="date" name="start" value={task.url} onChange={handleChange} />
-        </label>
+        <Autocomplete
+          options={tasks}
+          getOptionLabel={(option) => option.taskname}
+          style={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" />}
+        />
+        <Autocomplete
+          options={classrooms}
+          getOptionLabel={(option) => option.classname}
+          style={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Choix de la classe" variant="outlined" />}
+        />
         <button type="submit">Valider</button>
         <button>Annuler</button>
       </form>
+      <div>
+        <h4>Liste des devoirs assignés :</h4>
+        <ul>
+          {assignations.map((assign) => (
+            <li key={assign._id}>
+              {assign.task.taskname} pour la classe {assign.affectedTo.classname}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

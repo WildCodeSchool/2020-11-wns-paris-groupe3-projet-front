@@ -11,13 +11,44 @@ export const ALL_TASKS = gql`
   }
 `;
 
-export const CREATE_TASK = gql`
-  mutation CreateTask($input: InputTask!) {
-    createTask(input: $input) {
+export const CREATE_TASK_ASSIGNATION = gql`
+  mutation createAssignation($input: InputTaskAssignation!) {
+    createAssignation(input: $input) {
+      task
+      end_date
+      affectedTo
+    }
+  }
+`;
+
+export const TASK_ASSIGNATIONS = gql`
+  query tasksAssignations {
+    tasksAssignations {
       _id
-      taskname
-      url
-      creation_date
+      task {
+        taskname
+      }
+      affectedTo {
+        classname
+      }
+      end_date
+    }
+  }
+`;
+
+export const CLASSROOMS = gql`
+  query classrooms {
+    classrooms {
+      _id
+      classname
+      users {
+        _id
+        username
+        speciality
+        role {
+          _id
+        }
+      }
     }
   }
 `;

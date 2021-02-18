@@ -6,7 +6,7 @@ import Agenda from './Agenda';
 import FormNewTask from './FormNewTask';
 
 import { Task, HandleChange, HandleSubmit } from '../types';
-import { ALL_TASKS, CREATE_TASK } from '../queries';
+import { ALL_TASKS } from '../queries';
 
 const Planning = (): JSX.Element => {
   // const { loading, error, data, refetch } = useQuery(ALL_TASKS);

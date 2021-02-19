@@ -2,15 +2,13 @@ import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import 'moment/locale/fr';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Button, List, ListItem } from '@material-ui/core';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
 
-import { Button } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
+import { TextInput, Form, KeyboardDatePickerInput } from '../styles/form';
 
 interface FormAssignationProps {
   tasks: Task[];
@@ -36,23 +34,23 @@ const TaskAssignationForm = ({
   return (
     <div>
       <h4>Assigner un devoir</h4>
-      <form onSubmit={handleSubmit} aria-label="form">
+      <Form onSubmit={handleSubmit} aria-label="form">
         <Autocomplete
           options={tasks}
           getOptionLabel={(option) => option.taskname}
           style={{ width: 300 }}
           onChange={handleChangeTask}
-          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" required />}
+          renderInput={(params) => <TextInput {...params} label="Choix du devoir" variant="outlined" required />}
         />
         <Autocomplete
           options={classrooms}
           getOptionLabel={(option) => option.classname}
           style={{ width: 300 }}
           onChange={handleChangeClassroom}
-          renderInput={(params) => <TextField {...params} label="Choix de la classe" variant="outlined" required />}
+          renderInput={(params) => <TextInput {...params} label="Choix de la classe" variant="outlined" required />}
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
+          <KeyboardDatePickerInput
             autoOk
             disablePast
             disableToolbar
@@ -67,7 +65,7 @@ const TaskAssignationForm = ({
         </MuiPickersUtilsProvider>
         <Button type="submit">Valider</Button>
         <Button>Annuler</Button>
-      </form>
+      </Form>
       <>
         <h4>Liste des devoirs assignés :</h4>
         <List component="nav" aria-label="secondary mailbox folders">

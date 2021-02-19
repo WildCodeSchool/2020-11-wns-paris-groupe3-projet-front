@@ -5,7 +5,18 @@ import { TaskAssignation } from '../types';
 
 import TaskAssignationDailyPreview from './TaskAssignationDailyPreview';
 
-import './style.css';
+import {
+  CalendarContainer,
+  CalendarHeader,
+  Body,
+  CalendarHeaderPrev,
+  CalendarHeaderNext,
+  Week,
+  Day,
+  DayDiv,
+  DayDivTask,
+  DayNames,
+} from '../styles/calendar';
 
 interface CalendarProps {
   assignations: TaskAssignation[];
@@ -57,16 +68,6 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
     return result;
   };
 
-  const dayStyles = (day: Moment) => {
-    if (beforeToday(day)) return 'before';
-    if (isSelected(day)) return 'selected';
-    if (isToday(day)) return 'today';
-  };
-
-  const eventStyles = (day: Moment) => {
-    if (hasEvent(day)) return 'event';
-  };
-
   const displayTasks = (day: Moment) => {
     const tasksToDisplayTmp = assignations.filter(
       (assign) => moment(assign.end_date).format('YYYY-MM-DD') === day.format('YYYY-MM-DD'),
@@ -91,38 +92,34 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
 
   return (
     <>
-      <div className="calendar">
-        <div className="header">
-          <div className="previous" onClick={() => setValue(prevMonth())}>
-            {String.fromCharCode(171)}
-          </div>
-          <div className="current">
+      <CalendarContainer>
+        <CalendarHeader>
+          <CalendarHeaderPrev onClick={() => setValue(prevMonth())}>{String.fromCharCode(171)}</CalendarHeaderPrev>
+          <div>
             {currMonthName()} {currYear()}
           </div>
-          <div className="next" onClick={() => setValue(nextMonth())}>
-            {String.fromCharCode(187)}
-          </div>
-        </div>
-        <div className="body">
-          <div className="day-names">
+          <CalendarHeaderNext onClick={() => setValue(nextMonth())}>{String.fromCharCode(187)}</CalendarHeaderNext>
+        </CalendarHeader>
+        <Body>
+          <DayNames>
             {daysNames.map((d, i) => (
-              <div key={i} className="week">
-                {d}
-              </div>
+              <Week key={i}>{d}</Week>
             ))}
-          </div>
+          </DayNames>
           {calendar.map((week, i) => (
             <div key={i}>
               {week.map((day: Moment, i) => (
-                <div key={i} className="day" onClick={() => displayTasks(day)}>
-                  <div className={dayStyles(day)}>{day.format('D').toString()}</div>
-                  <div className={eventStyles(day)} />
-                </div>
+                <Day key={i} onClick={() => displayTasks(day)}>
+                  <DayDiv isToday={isToday(day)} beforeToday={beforeToday(day)} isSelected={isSelected(day)}>
+                    {day.format('D').toString()}
+                  </DayDiv>
+                  <DayDivTask hasEvent={hasEvent(day)} />
+                </Day>
               ))}
             </div>
           ))}
-        </div>
-      </div>
+        </Body>
+      </CalendarContainer>
       <TaskAssignationDailyPreview tasksToDisplay={tasksToDisplay} />
     </>
   );

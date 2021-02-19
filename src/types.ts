@@ -25,7 +25,7 @@ export type NewAssignation = {
 };
 
 // Functions
-export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
+export type HandleChange = (e: React.ChangeEvent<HTMLInputElement> | Date | null) => void;
 export type HandleChangeAssignation = (
   e: React.ChangeEvent<Record<string, unknown>>,
   value: Task | Classroom | null,

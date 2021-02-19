@@ -1,6 +1,7 @@
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
+import 'moment/locale/fr';
 
 import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
 
@@ -8,6 +9,9 @@ import { Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+
 interface FormAssignationProps {
   tasks: Task[];
   assignations: TaskAssignation[];
@@ -19,7 +23,7 @@ interface FormAssignationProps {
   handleSubmit: HandleSubmit;
 }
 
-const FormNewTask = ({
+const TaskAssignationForm = ({
   tasks,
   assignations,
   classrooms,
@@ -38,17 +42,18 @@ const FormNewTask = ({
           getOptionLabel={(option) => option.taskname}
           style={{ width: 300 }}
           onChange={handleChangeTask}
-          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" value={params} />}
+          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" required />}
         />
         <Autocomplete
           options={classrooms}
           getOptionLabel={(option) => option.classname}
           style={{ width: 300 }}
           onChange={handleChangeClassroom}
-          renderInput={(params) => <TextField {...params} label="Choix de la classe" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label="Choix de la classe" variant="outlined" required />}
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
+            autoOk
             disablePast
             disableToolbar
             invalidDateMessage="Please"
@@ -57,25 +62,25 @@ const FormNewTask = ({
             format="dd/MM/yyyy"
             InputAdornmentProps={{ position: 'start' }}
             value={selectedDate}
-            onChange={(date: any) => handleChangeDate(date)}
+            onChange={(date) => handleChangeDate(date)}
           />
         </MuiPickersUtilsProvider>
         <Button type="submit">Valider</Button>
         <Button>Annuler</Button>
       </form>
-      <div>
+      <>
         <h4>Liste des devoirs assignés :</h4>
-        <ul>
+        <List component="nav" aria-label="secondary mailbox folders">
           {assignations.map((assign) => (
-            <li key={assign._id}>
+            <ListItem key={assign._id} button>
               {assign.task.taskname} a été assigné à la classe {assign.affectedTo.classname} et doit être rendu le{' '}
-              {assign.end_date}
-            </li>
+              {moment(assign.end_date).locale('fr').format('dddd Do MMMM YYYY')}
+            </ListItem>
           ))}
-        </ul>
-      </div>
+        </List>
+      </>
     </div>
   );
 };
 
-export default FormNewTask;
+export default TaskAssignationForm;

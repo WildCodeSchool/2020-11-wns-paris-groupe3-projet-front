@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import Calendar from './Calendar';
-import FormNewTask from './FormNewTask';
+import TaskAssignationForm from './TaskAssignationForm';
 
 import { NewAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
@@ -19,10 +19,10 @@ const Planning = (): JSX.Element => {
     CLASSROOMS,
   );
   const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION);
-  const selectedDate = new Date();
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [assignation, setAssignation] = useState<NewAssignation>({
     task: '',
-    end_date: '',
+    end_date: new Date().toString(),
     affectedTo: '',
   });
 
@@ -41,17 +41,19 @@ const Planning = (): JSX.Element => {
   };
 
   const handleChangeDate: HandleChange = (date) => {
-    setAssignation({ ...assignation, end_date: date.toString() });
+    if (date) {
+      setAssignation({ ...assignation, end_date: date.toString() });
+    }
   };
 
   const handleSubmit: HandleSubmit = async (e) => {
     e.preventDefault();
     try {
       createAssignation({ variables: { input: assignation } });
-      refetch();
     } catch (err) {
       console.log(err);
     }
+    refetch();
   };
 
   if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
@@ -64,7 +66,7 @@ const Planning = (): JSX.Element => {
   return (
     <div>
       <Calendar assignations={tasksAssignations} />
-      <FormNewTask
+      <TaskAssignationForm
         tasks={tasks}
         assignations={tasksAssignations}
         classrooms={classrooms}

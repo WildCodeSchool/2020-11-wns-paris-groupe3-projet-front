@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 
-import { TaskAssignation } from '../types';
-
 import TaskAssignationDailyPreview from './TaskAssignationDailyPreview';
+
+import { TaskAssignation } from '../types';
 
 import {
   CalendarContainer,

@@ -1,7 +1,5 @@
 import React from 'react';
-
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
+import { ListItem, List } from '@material-ui/core';
 
 import { TaskAssignation } from '../types';
 

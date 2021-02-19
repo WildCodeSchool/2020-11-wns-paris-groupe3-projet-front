@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import Calendar from './Calendar';
 import FormNewTask from './FormNewTask';
 
-import { TaskAssignation, HandleChange, HandleSubmit } from '../types';
+import { NewAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
 
 const Planning = (): JSX.Element => {
@@ -19,35 +19,59 @@ const Planning = (): JSX.Element => {
     CLASSROOMS,
   );
   const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION);
-
-  const [assignation, setAssignation] = useState<TaskAssignation>({
-    _id: '',
-    task: { taskname: '', url: '' },
-    end_date: new Date(),
-    affectedTo: { classname: '' },
+  const selectedDate = new Date();
+  const [assignation, setAssignation] = useState<NewAssignation>({
+    task: '',
+    end_date: '',
+    affectedTo: '',
   });
 
-  const handleChange: HandleChange = (e) => {
-    const taskTemp = { ...assignation, [e.target.name]: e.target.value };
-    setAssignation(taskTemp);
+  const handleChangeTask: HandleChangeAssignation = (e, value) => {
+    e.preventDefault();
+    if (value) {
+      setAssignation({ ...assignation, task: value._id });
+    }
   };
 
-  const handleSubmit: HandleSubmit = (e) => {
+  const handleChangeClassroom: HandleChangeAssignation = (e, value) => {
     e.preventDefault();
-    createAssignation({ variables: { input: assignation } });
-    refetch();
+    if (value) {
+      setAssignation({ ...assignation, affectedTo: value._id });
+    }
+  };
+
+  const handleChangeDate: HandleChange = (date) => {
+    setAssignation({ ...assignation, end_date: date.toString() });
+  };
+
+  const handleSubmit: HandleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      createAssignation({ variables: { input: assignation } });
+      refetch();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
   if (tasksQueryError || assignationQueryError || classroomsQueryError) return <p>Error</p>;
+
+  const { tasksAssignations } = assignationQueryData;
+  const { classrooms } = classroomsQueryData;
+  const { tasks } = tasksQueryData;
+
   return (
     <div>
-      <Calendar assignations={assignationQueryData.tasksAssignations} />
+      <Calendar assignations={tasksAssignations} />
       <FormNewTask
-        tasks={tasksQueryData.tasks}
-        assignations={assignationQueryData.tasksAssignations}
-        classrooms={classroomsQueryData.classrooms}
-        handleChange={handleChange}
+        tasks={tasks}
+        assignations={tasksAssignations}
+        classrooms={classrooms}
+        selectedDate={selectedDate}
+        handleChangeTask={handleChangeTask}
+        handleChangeClassroom={handleChangeClassroom}
+        handleChangeDate={handleChangeDate}
         handleSubmit={handleSubmit}
       />
     </div>

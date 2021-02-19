@@ -14,9 +14,13 @@ export const ALL_TASKS = gql`
 export const CREATE_TASK_ASSIGNATION = gql`
   mutation createAssignation($input: InputTaskAssignation!) {
     createAssignation(input: $input) {
-      task
+      task {
+        taskname
+      }
       end_date
-      affectedTo
+      affectedTo {
+        classname
+      }
     }
   }
 `;

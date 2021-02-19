@@ -1,7 +1,14 @@
 // Objects
 export type Task = {
+  _id: string;
   taskname: string;
   url: string;
+};
+
+export type Classroom = {
+  _id: string;
+  classname: string;
+  // users: User;
 };
 
 export type TaskAssignation = {
@@ -11,11 +18,16 @@ export type TaskAssignation = {
   affectedTo: Classroom;
 };
 
-export type Classroom = {
-  classname: string;
-  // users: User;
+export type NewAssignation = {
+  task: string;
+  end_date: string;
+  affectedTo: string;
 };
 
 // Functions
 export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
+export type HandleChangeAssignation = (
+  e: React.ChangeEvent<Record<string, unknown>>,
+  value: Task | Classroom | null,
+) => void;
 export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => void;

@@ -1,18 +1,34 @@
 import React from 'react';
-import { Task, TaskAssignation, Classroom, HandleChange, HandleSubmit } from '../types';
+import DateFnsUtils from '@date-io/date-fns';
+import moment from 'moment';
 
+import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
+
+import { Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-
-interface FormProps {
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+interface FormAssignationProps {
   tasks: Task[];
   assignations: TaskAssignation[];
   classrooms: Classroom[];
-  handleChange: HandleChange;
+  selectedDate: Date;
+  handleChangeTask: HandleChangeAssignation;
+  handleChangeClassroom: HandleChangeAssignation;
+  handleChangeDate: HandleChange;
   handleSubmit: HandleSubmit;
 }
 
-const FormNewTask = ({ tasks, assignations, classrooms, handleSubmit, handleChange }: FormProps): JSX.Element => {
+const FormNewTask = ({
+  tasks,
+  assignations,
+  classrooms,
+  selectedDate,
+  handleSubmit,
+  handleChangeTask,
+  handleChangeClassroom,
+  handleChangeDate,
+}: FormAssignationProps): JSX.Element => {
   return (
     <div>
       <h4>Assigner un devoir</h4>
@@ -21,23 +37,39 @@ const FormNewTask = ({ tasks, assignations, classrooms, handleSubmit, handleChan
           options={tasks}
           getOptionLabel={(option) => option.taskname}
           style={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" />}
+          onChange={handleChangeTask}
+          renderInput={(params) => <TextField {...params} label="Choix du devoir" variant="outlined" value={params} />}
         />
         <Autocomplete
           options={classrooms}
           getOptionLabel={(option) => option.classname}
           style={{ width: 300 }}
+          onChange={handleChangeClassroom}
           renderInput={(params) => <TextField {...params} label="Choix de la classe" variant="outlined" />}
         />
-        <button type="submit">Valider</button>
-        <button>Annuler</button>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disablePast
+            disableToolbar
+            invalidDateMessage="Please"
+            inputVariant="outlined"
+            variant="inline"
+            format="dd/MM/yyyy"
+            InputAdornmentProps={{ position: 'start' }}
+            value={selectedDate}
+            onChange={(date: any) => handleChangeDate(date)}
+          />
+        </MuiPickersUtilsProvider>
+        <Button type="submit">Valider</Button>
+        <Button>Annuler</Button>
       </form>
       <div>
         <h4>Liste des devoirs assignés :</h4>
         <ul>
           {assignations.map((assign) => (
             <li key={assign._id}>
-              {assign.task.taskname} pour la classe {assign.affectedTo.classname}
+              {assign.task.taskname} a été assigné à la classe {assign.affectedTo.classname} et doit être rendu le{' '}
+              {assign.end_date}
             </li>
           ))}
         </ul>

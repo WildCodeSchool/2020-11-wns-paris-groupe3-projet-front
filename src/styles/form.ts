@@ -35,6 +35,9 @@ const ButtonValidate = `
   border-color: transparent;
   background-color: ${theme.palette.secondary.main};
   color: white;
+  :hover {
+    color: ${theme.palette.secondary.main}
+  }
 `;
 
 export const ButtonForm = styled(Button)<ButtonProps>`

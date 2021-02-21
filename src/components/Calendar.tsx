@@ -77,7 +77,7 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
   };
 
   useEffect(() => {
-    const day = startDay.clone();
+    const day = startDay.subtract(1, 'day').clone();
     const calendarTmp = [];
     while (day.isBefore(endDay, 'day')) {
       calendarTmp.push(

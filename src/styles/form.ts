@@ -36,7 +36,8 @@ const ButtonValidate = `
   background-color: ${theme.palette.secondary.main};
   color: white;
   :hover {
-    color: ${theme.palette.secondary.main}
+    color: ${theme.palette.secondary.main};
+    border-color: ${theme.palette.secondary.main};
   }
 `;
 

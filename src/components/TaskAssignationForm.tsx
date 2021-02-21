@@ -72,7 +72,11 @@ const TaskAssignationForm = ({
       </Form>
       <>
         <h4>Liste des devoirs assignés :</h4>
-        <TaskAssignationPreview tasksToDisplay={assignations} daily={false} />
+        {assignations.length > 0 ? (
+          <TaskAssignationPreview tasksToDisplay={assignations} daily={false} />
+        ) : (
+          <p>Pas de devoir.</p>
+        )}
       </>
     </div>
   );

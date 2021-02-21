@@ -120,7 +120,11 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
           ))}
         </Body>
       </CalendarContainer>
-      <TaskAssignationPreview tasksToDisplay={tasksToDisplay} daily />
+      {tasksToDisplay.length > 0 ? (
+        <TaskAssignationPreview tasksToDisplay={tasksToDisplay} daily />
+      ) : (
+        <p>Pas de devoir.</p>
+      )}
     </>
   );
 };

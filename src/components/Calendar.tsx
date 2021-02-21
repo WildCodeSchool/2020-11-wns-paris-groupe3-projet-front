@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 
-import TaskAssignationDailyPreview from './TaskAssignationDailyPreview';
+import TaskAssignationPreview from './TaskAssignationPreview';
 
 import { TaskAssignation } from '../types';
 
@@ -120,7 +120,7 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
           ))}
         </Body>
       </CalendarContainer>
-      <TaskAssignationDailyPreview tasksToDisplay={tasksToDisplay} />
+      <TaskAssignationPreview tasksToDisplay={tasksToDisplay} daily />
     </>
   );
 };

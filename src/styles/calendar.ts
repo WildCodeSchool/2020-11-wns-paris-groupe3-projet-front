@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../theme';
 
 type DayDivProps = {
   isToday: boolean;
@@ -15,34 +16,37 @@ export const CalendarContainer = styled.div`
   font-size: 1rem;
   max-width: 400px;
   margin: auto;
+  box-shadow: 0px 7px 22px -7px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
 `;
 
 export const CalendarHeader = styled.div`
-  background-color: lightblue;
+  background-color: ${theme.palette.primary.main};
   text-align: center;
   min-height: 2rem;
   line-height: 2rem;
-  color: black;
+  color: white;
   font-weight: 700;
   display: flex;
-  border-radius: 5px 5px 0 0;
+  border-radius: 8px 8px 0 0;
 `;
 
 export const Body = styled.div`
-  border: 1px solid lightblue;
-  border-radius: 0 0 5px 5px;
+  padding: 0.5rem;
 `;
 
 export const CalendarHeaderPrev = styled.div`
   flex: 1;
   text-align: left;
   margin-left: 1rem;
+  cursor: pointer;
 `;
 
 export const CalendarHeaderNext = styled.div`
   flex: 1;
   text-align: right;
   margin-right: 1rem;
+  cursor: pointer;
 `;
 
 export const Week = styled.div`
@@ -70,6 +74,7 @@ export const Day = styled.div`
   box-sizing: border-box;
   z-index: 1;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const DayDivBefore = `
@@ -78,14 +83,14 @@ export const DayDivBefore = `
 `;
 
 export const DayDivSelected = `
-  background-color: red;
+  background-color: ${theme.palette.primary.main};
   color: white;
   border-radius: 5px;
   font-weight: bold;
 `;
 
 export const DayDivToday = `
-  background-color: grey;
+  background-color: rgba(236,152,47,0.5);
   border-radius: 5px;
 `;
 
@@ -102,7 +107,7 @@ export const DayDiv = styled.div<DayDivProps>`
 `;
 
 export const DayDivTaskHasEvent = `
-  background-color: purple;
+  background-color: ${theme.palette.secondary.main};
   height: 8px;
   width: 8px;
   border-radius: 50%;

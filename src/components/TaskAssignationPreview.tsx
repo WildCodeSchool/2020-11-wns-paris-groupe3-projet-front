@@ -11,16 +11,14 @@ interface TaskAssignationPreviewProps {
 
 const TaskAssignationPreview = ({ tasksToDisplay, daily }: TaskAssignationPreviewProps): JSX.Element => {
   return (
-    <div>
-      <List component="nav" aria-label="secondary mailbox folders">
-        {tasksToDisplay.map((assign) => (
-          <ListItem key={assign._id} button>
-            {assign.task.taskname} a été assigné à la classe {assign.affectedTo.classname}{' '}
-            {!daily && `et doit être rendu le ${moment(assign.end_date).locale('fr').format('dddd Do MMMM YYYY')}`}
-          </ListItem>
-        ))}
-      </List>
-    </div>
+    <List component="nav" aria-label="secondary mailbox folders">
+      {tasksToDisplay.map((assign) => (
+        <ListItem key={assign._id} button>
+          {assign.task.taskname} a été assigné à la classe {assign.affectedTo.classname}{' '}
+          {!daily && `et doit être rendu le ${moment(assign.end_date).locale('fr').format('dddd Do MMMM YYYY')}`}
+        </ListItem>
+      ))}
+    </List>
   );
 };
 

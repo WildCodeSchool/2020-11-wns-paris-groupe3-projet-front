@@ -48,11 +48,7 @@ const Planning = (): JSX.Element => {
 
   const handleSubmit: HandleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      createAssignation({ variables: { input: assignation } });
-    } catch (err) {
-      console.log(err);
-    }
+    createAssignation({ variables: { input: assignation } });
     refetch();
   };
 

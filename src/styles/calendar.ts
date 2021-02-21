@@ -77,19 +77,19 @@ export const Day = styled.div`
   cursor: pointer;
 `;
 
-export const DayDivBefore = `
+const DayDivBefore = `
   color: grey;
   border-radius: 5px;
 `;
 
-export const DayDivSelected = `
+const DayDivSelected = `
   background-color: ${theme.palette.primary.main};
   color: white;
   border-radius: 5px;
   font-weight: bold;
 `;
 
-export const DayDivToday = `
+const DayDivToday = `
   background-color: rgba(236,152,47,0.5);
   border-radius: 5px;
 `;

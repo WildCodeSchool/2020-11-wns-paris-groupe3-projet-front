@@ -9,16 +9,15 @@ import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } fro
 
 const Planning = (): JSX.Element => {
   const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);
-  const {
-    loading: assignationQueryLoading,
-    error: assignationQueryError,
-    data: assignationQueryData,
-    refetch,
-  } = useQuery(TASK_ASSIGNATIONS);
+  const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
+    TASK_ASSIGNATIONS,
+  );
   const { loading: classroomsQueryLoading, error: classroomsQueryError, data: classroomsQueryData } = useQuery(
     CLASSROOMS,
   );
-  const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION);
+  const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION, {
+    refetchQueries: [{ query: TASK_ASSIGNATIONS }],
+  });
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [assignation, setAssignation] = useState<NewAssignation>({
     task: '',
@@ -49,7 +48,6 @@ const Planning = (): JSX.Element => {
   const handleSubmit: HandleSubmit = async (e) => {
     e.preventDefault();
     createAssignation({ variables: { input: assignation } });
-    refetch();
   };
 
   if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;

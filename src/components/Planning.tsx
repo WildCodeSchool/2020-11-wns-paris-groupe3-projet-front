@@ -53,7 +53,7 @@ const Planning = (): JSX.Element => {
   };
 
   if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
-  if (tasksQueryError || assignationQueryError || classroomsQueryError) return <p>Error</p>;
+  if (tasksQueryError || assignationQueryError || classroomsQueryError) return <p>Error...</p>;
 
   const { tasksAssignations } = assignationQueryData;
   const { classrooms } = classroomsQueryData;

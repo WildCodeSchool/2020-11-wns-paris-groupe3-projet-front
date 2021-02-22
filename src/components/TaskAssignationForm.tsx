@@ -64,10 +64,8 @@ const TaskAssignationForm = ({
           />
         </MuiPickersUtilsProvider>
         <ButtonFormContainer>
-          <ButtonForm validate={false}>Annuler</ButtonForm>
-          <ButtonForm type="submit" validate>
-            Valider
-          </ButtonForm>
+          <ButtonForm type="button">Annuler</ButtonForm>
+          <ButtonForm type="submit">Valider</ButtonForm>
         </ButtonFormContainer>
       </Form>
       <>

@@ -4,7 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 import theme from '../theme';
 
 type ButtonProps = {
-  validate: boolean;
+  type: string;
 };
 
 export const Form = styled.form`
@@ -46,5 +46,5 @@ export const ButtonForm = styled(Button)<ButtonProps>`
   color: ${theme.palette.primary.main};
   outline: none;
   cursor: pointer;
-  ${({ validate }) => validate && ButtonValidate}
+  ${({ type }) => type === 'submit' && ButtonValidate}
 `;

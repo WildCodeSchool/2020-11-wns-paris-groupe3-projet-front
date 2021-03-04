@@ -2,9 +2,9 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import NewTask from './components/NewTask';
+import CreationTask from '../components/CreationTask';
 
-import { CREATE_TASK } from './queries';
+import { CREATE_TASK } from '../queries';
 
 const NEW_TASK_SUCCESS_MOCK = {
   request: {
@@ -31,7 +31,7 @@ describe('NewTask', () => {
     it('should render header', () => {
       render(
         <MockedProvider>
-          <NewTask />
+          <CreationTask />
         </MockedProvider>,
       );
 
@@ -42,7 +42,7 @@ describe('NewTask', () => {
     it('should render text input label', () => {
       render(
         <MockedProvider>
-          <NewTask />
+          <CreationTask />
         </MockedProvider>,
       );
 
@@ -53,7 +53,7 @@ describe('NewTask', () => {
     it('should render upload box text', () => {
       render(
         <MockedProvider>
-          <NewTask />
+          <CreationTask />
         </MockedProvider>,
       );
 
@@ -66,7 +66,7 @@ describe('NewTask', () => {
     it('should render the form and the submit button', async () => {
       render(
         <MockedProvider mocks={[NEW_TASK_SUCCESS_MOCK]} addTypename={false}>
-          <NewTask />
+          <CreationTask />
         </MockedProvider>,
       );
 

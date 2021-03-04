@@ -5,14 +5,14 @@ import { useMutation } from '@apollo/client';
 import FormUploadFile from './FormUploadFile';
 import Header from './Header';
 
-import { Task, HandleChange, HandleSubmit } from '../types';
+import { NewTask, HandleChange, HandleSubmit } from '../types';
 import { CREATE_TASK } from '../queries';
 
-const NewTask = (): JSX.Element => {
+const CreationTask = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [task, setTask] = useState<Task>({
+  const [task, setTask] = useState<NewTask>({
     taskname: '',
     url: '',
   });
@@ -79,4 +79,4 @@ const NewTask = (): JSX.Element => {
   );
 };
 
-export default NewTask;
+export default CreationTask;

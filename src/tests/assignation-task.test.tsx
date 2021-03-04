@@ -2,7 +2,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import App from '../App';
+import Planning from '../components/Planning';
 import { TASK_ASSIGNATIONS, ALL_TASKS, CLASSROOMS } from '../queries';
 
 const ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK = {
@@ -59,8 +59,10 @@ const ALL_CLASSROOMS_SUCCESS_MOCK = {
           classname: 'Dev Web',
           users: {
             _id: '1',
-            username: 'Fred',
-            speciality: 'Dev',
+            firstname: 'Fred',
+            speciality: {
+              _id: 1,
+            },
             role: {
               _id: 1,
             },
@@ -71,8 +73,10 @@ const ALL_CLASSROOMS_SUCCESS_MOCK = {
           classname: 'Data',
           users: {
             _id: '2',
-            username: 'Jean',
-            speciality: 'Data',
+            firstname: 'Jean',
+            speciality: {
+              _id: 2,
+            },
             role: {
               _id: 2,
             },
@@ -135,7 +139,7 @@ describe('App', () => {
           mocks={[ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK, ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]}
           addTypename={false}
         >
-          <App />
+          <Planning />
         </MockedProvider>,
       );
 
@@ -147,27 +151,12 @@ describe('App', () => {
     it('renders error', async () => {
       render(
         <MockedProvider mocks={[ALL_TASK_ASSIGNATIONS_ERROR_MOCK, ALL_CLASSROOMS_ERROR_MOCK, ALL_TASKS_ERROR_MOCK]}>
-          <App />
+          <Planning />
         </MockedProvider>,
       );
 
       const errorMessage = await waitFor(() => screen.getByText('Error...'));
       expect(errorMessage).toBeInTheDocument();
-    });
-  });
-
-  describe('when fetching tasks assignations succeeded', () => {
-    it('renders list with tasks', async () => {
-      render(
-        <MockedProvider
-          mocks={[ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK, ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]}
-        >
-          <App />
-        </MockedProvider>,
-      );
-
-      const listTitle = await waitFor(() => screen.getByText('Liste des devoirs assignés :'));
-      expect(listTitle).toBeInTheDocument();
     });
   });
 });

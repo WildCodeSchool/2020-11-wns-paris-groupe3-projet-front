@@ -47,10 +47,14 @@ export const CLASSROOMS = gql`
       classname
       users {
         _id
-        username
-        speciality
+        firstname
+        lastname
+        email
+        speciality {
+          speciality_name
+        }
         role {
-          _id
+          role_name
         }
       }
     }

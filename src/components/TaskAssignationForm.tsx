@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import TaskAssignationPreview from './TaskAssignationPreview';
 
-import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
+import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
 
 import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContainer } from '../styles/form';
 
@@ -17,7 +17,7 @@ interface FormAssignationProps {
   selectedDate: Date;
   handleChangeTask: HandleChangeAssignation;
   handleChangeClassroom: HandleChangeAssignation;
-  handleChangeDate: HandleChange;
+  handleChangeDate: HandleChangeDate;
   handleSubmit: HandleSubmit;
 }
 

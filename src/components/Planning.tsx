@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import Calendar from './Calendar';
 import TaskAssignationForm from './TaskAssignationForm';
 
-import { NewAssignation, HandleChangeAssignation, HandleChange, HandleSubmit } from '../types';
+import { NewAssignation, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
 
 const Planning = (): JSX.Element => {
@@ -39,7 +39,7 @@ const Planning = (): JSX.Element => {
     }
   };
 
-  const handleChangeDate: HandleChange = (date) => {
+  const handleChangeDate: HandleChangeDate = (date) => {
     if (date) {
       setAssignation({ ...assignation, end_date: date.toString() });
     }

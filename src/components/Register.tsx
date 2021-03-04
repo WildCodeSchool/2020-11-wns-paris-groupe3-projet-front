@@ -22,7 +22,8 @@ const Register = ({ history }: HistoryType): JSX.Element => {
   });
 
   const [register] = useMutation(REGISTER_USER, {
-    update(_, { data: { register: userData } }) {
+    update(_, { data: { register: user } }) {
+      const userData = { user };
       dispatch.loginData(userData);
       history.push('/planning');
     },

@@ -1,40 +1,76 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import moment from 'moment';
 
-import Agenda from './Agenda';
-import FormNewTask from './FormNewTask';
+import Calendar from './Calendar';
+import TaskAssignationForm from './TaskAssignationForm';
 
-import { Task, HandleChange, HandleSubmit } from '../types';
-import { ALL_TASKS, CREATE_TASK } from '../queries';
+import { NewAssignation, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
+import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
 
 const Planning = (): JSX.Element => {
-  const { loading, error, data, refetch } = useQuery(ALL_TASKS);
-  const [createTask] = useMutation(CREATE_TASK);
-
-  const [task, setTask] = useState<Task>({
-    title: '',
-    start: moment().toDate(),
-    end: moment().add(1, 'days').toDate(),
+  const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);
+  const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
+    TASK_ASSIGNATIONS,
+  );
+  const { loading: classroomsQueryLoading, error: classroomsQueryError, data: classroomsQueryData } = useQuery(
+    CLASSROOMS,
+  );
+  const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION, {
+    refetchQueries: [{ query: TASK_ASSIGNATIONS }],
+  });
+  // eslint-disable-next-line
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [assignation, setAssignation] = useState<NewAssignation>({
+    task: '',
+    end_date: new Date().toString(),
+    affectedTo: '',
   });
 
-  const handleChange: HandleChange = (e) => {
-    const taskTemp = { ...task, [e.target.name]: e.target.value };
-    setTask(taskTemp);
-  };
-
-  const handleSubmit: HandleSubmit = (e) => {
+  const handleChangeTask: HandleChangeAssignation = (e, value) => {
     e.preventDefault();
-    createTask({ variables: { input: task } });
-    refetch();
+    if (value) {
+      setAssignation({ ...assignation, task: value._id });
+    }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  const handleChangeClassroom: HandleChangeAssignation = (e, value) => {
+    e.preventDefault();
+    if (value) {
+      setAssignation({ ...assignation, affectedTo: value._id });
+    }
+  };
+
+  const handleChangeDate: HandleChangeDate = (date) => {
+    if (date) {
+      setAssignation({ ...assignation, end_date: date.toString() });
+    }
+  };
+
+  const handleSubmit: HandleSubmit = async (e) => {
+    e.preventDefault();
+    createAssignation({ variables: { input: assignation } });
+  };
+
+  if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
+  if (tasksQueryError || assignationQueryError || classroomsQueryError) return <p>Error...</p>;
+
+  const { tasksAssignations } = assignationQueryData;
+  const { classrooms } = classroomsQueryData;
+  const { tasks } = tasksQueryData;
+
   return (
     <div>
-      <Agenda events={data.tasks} />
-      <FormNewTask task={task} handleChange={handleChange} handleSubmit={handleSubmit} />
+      <Calendar assignations={tasksAssignations} />
+      <TaskAssignationForm
+        tasks={tasks}
+        assignations={tasksAssignations}
+        classrooms={classrooms}
+        selectedDate={selectedDate}
+        handleChangeTask={handleChangeTask}
+        handleChangeClassroom={handleChangeClassroom}
+        handleChangeDate={handleChangeDate}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 };

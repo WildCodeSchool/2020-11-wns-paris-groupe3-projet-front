@@ -18,6 +18,7 @@ const Planning = (): JSX.Element => {
   const [createAssignation] = useMutation(CREATE_TASK_ASSIGNATION, {
     refetchQueries: [{ query: TASK_ASSIGNATIONS }],
   });
+  // eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [assignation, setAssignation] = useState<NewAssignation>({
     task: '',

@@ -6,12 +6,21 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import TaskAssignationPreview from './TaskAssignationPreview';
 
-import { Task, Classroom, TaskAssignation, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
+import {
+  Task,
+  Classroom,
+  TaskAssignation,
+  NewAssignationType,
+  HandleChangeAssignation,
+  HandleChangeDate,
+  HandleSubmit,
+} from '../types';
 
 import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContainer } from '../styles/form';
 
 interface FormAssignationProps {
   tasks: Task[];
+  assignation: NewAssignationType;
   assignations: TaskAssignation[];
   classrooms: Classroom[];
   selectedDate: Date;
@@ -23,6 +32,7 @@ interface FormAssignationProps {
 
 const TaskAssignationForm = ({
   tasks,
+  assignation,
   assignations,
   classrooms,
   selectedDate,
@@ -65,7 +75,9 @@ const TaskAssignationForm = ({
         </MuiPickersUtilsProvider>
         <ButtonFormContainer>
           <ButtonForm type="button">Annuler</ButtonForm>
-          <ButtonForm type="submit">Valider</ButtonForm>
+          <ButtonForm type="submit" disabled={assignation.task.length === 0 || assignation.affectedTo.length === 0}>
+            Valider
+          </ButtonForm>
         </ButtonFormContainer>
       </Form>
       <>

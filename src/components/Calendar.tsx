@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 
-import TaskAssignationPreview from './TaskAssignationPreview';
+import CalendarDailyTasks from './CalendarDailyTasks';
 
 import { TaskAssignation } from '../types';
 
@@ -29,6 +29,7 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
   const daysNames = ['l', 'm', 'm', 'j', 'v', 's', 'd'];
   const startDay = value.clone().startOf('month').startOf('week');
   const endDay = value.clone().endOf('month').endOf('week');
+  const [open, setOpen] = useState(false);
 
   const currMonthName = () => {
     return value.format('MMMM');
@@ -74,6 +75,11 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
     );
     setValue(day);
     setTasksToDisplay(tasksToDisplayTmp);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -87,7 +93,6 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
       );
     }
     setCalendar(calendarTmp);
-    displayTasks(value);
   }, [value]);
 
   return (
@@ -120,10 +125,8 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
           ))}
         </Body>
       </CalendarContainer>
-      {tasksToDisplay.length > 0 ? (
-        <TaskAssignationPreview tasksToDisplay={tasksToDisplay} daily />
-      ) : (
-        <p>Pas de devoir.</p>
+      {tasksToDisplay.length > 0 && (
+        <CalendarDailyTasks tasksToDisplay={tasksToDisplay} open={open} handleClose={handleClose} />
       )}
     </>
   );

@@ -1,11 +1,13 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { Button, ButtonGroup } from '@material-ui/core/';
 
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
+
 import { TASK_ASSIGNATIONS } from '../queries';
+
+import { Container, ButtonLink } from '../styles/dashboard';
 
 const Dashboard = (): JSX.Element => {
   const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
@@ -20,17 +22,21 @@ const Dashboard = (): JSX.Element => {
   return (
     <div>
       <Header label="Tableau de bord" />
-      <div>
-        <ButtonGroup variant="contained" color="primary">
-          <Button>
-            <Link to="/task">Créer un nouveau devoir</Link>
-          </Button>
-          <Button>
-            <Link to="/assignation">Assigner un devoir à une classe</Link>
-          </Button>
-        </ButtonGroup>
-      </div>
-      <Calendar assignations={tasksAssignations} />
+      <Container>
+        <div>
+          <ButtonGroup variant="contained" color="primary">
+            <Button>
+              <ButtonLink to="/task">Créer un nouveau devoir</ButtonLink>
+            </Button>
+            <Button>
+              <ButtonLink to="/assignation">Assigner un devoir à une classe</ButtonLink>
+            </Button>
+          </ButtonGroup>
+        </div>
+        <div>
+          <Calendar assignations={tasksAssignations} />
+        </div>
+      </Container>
     </div>
   );
 };

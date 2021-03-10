@@ -9,9 +9,6 @@ import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } fro
 
 const NewAssignation = (): JSX.Element => {
   const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);
-  const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
-    TASK_ASSIGNATIONS,
-  );
   const { loading: classroomsQueryLoading, error: classroomsQueryError, data: classroomsQueryData } = useQuery(
     CLASSROOMS,
   );
@@ -51,10 +48,9 @@ const NewAssignation = (): JSX.Element => {
     createAssignation({ variables: { input: assignation } });
   };
 
-  if (tasksQueryLoading || assignationQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
-  if (tasksQueryError || assignationQueryError || classroomsQueryError) return <p>Error...</p>;
+  if (tasksQueryLoading || classroomsQueryLoading) return <p>Loading...</p>;
+  if (tasksQueryError || classroomsQueryError) return <p>Error...</p>;
 
-  const { tasksAssignations } = assignationQueryData;
   const { classrooms } = classroomsQueryData;
   const { tasks } = tasksQueryData;
 
@@ -64,7 +60,6 @@ const NewAssignation = (): JSX.Element => {
       <TaskAssignationForm
         tasks={tasks}
         assignation={assignation}
-        assignations={tasksAssignations}
         classrooms={classrooms}
         selectedDate={selectedDate}
         handleChangeTask={handleChangeTask}

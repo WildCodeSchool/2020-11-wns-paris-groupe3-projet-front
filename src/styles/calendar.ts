@@ -14,8 +14,7 @@ type DayDivTaskProps = {
 export const CalendarContainer = styled.div`
   box-sizing: border-box;
   font-size: 1rem;
-  max-width: 400px;
-  margin: auto;
+  width: 400px;
   box-shadow: 0px 7px 22px -7px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
 `;

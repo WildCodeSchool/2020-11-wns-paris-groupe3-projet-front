@@ -1,29 +1,15 @@
 import React from 'react';
 import moment from 'moment';
-import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Backdrop, Fade, ListItem, List } from '@material-ui/core';
+import { Modal, Backdrop, Fade, ListItem, List, Divider } from '@material-ui/core';
 
-import { TaskAssignation } from '../types';
+import { TaskAssignation, OnClick } from '../types';
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: 0,
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+import { useStyles } from '../styles/modal';
 
 interface CalendarDailyTasksProps {
   tasksToDisplay: TaskAssignation[];
   open: boolean;
-  handleClose: any;
+  handleClose: OnClick;
 }
 
 const CalendarDailyTasks = ({ tasksToDisplay, open, handleClose }: CalendarDailyTasksProps): JSX.Element => {
@@ -45,10 +31,16 @@ const CalendarDailyTasks = ({ tasksToDisplay, open, handleClose }: CalendarDaily
       <Fade in={open}>
         <List component="nav" aria-label="secondary mailbox folders" className={classes.paper}>
           {tasksToDisplay.map((assign) => (
-            <ListItem key={assign._id} button>
-              {assign.task.taskname} a été assigné à la classe {assign.affectedTo.classname} et doit être rendu le{' '}
-              {moment(assign.end_date).locale('fr').format('dddd Do MMMM YYYY')}
-            </ListItem>
+            <>
+              <ListItem key={assign._id} button>
+                <p>
+                  <strong>Titre du devoir :</strong> {assign.task.taskname} <br />
+                  <strong>Assignée à la classe :</strong> {assign.affectedTo.classname} <br />
+                  <strong>Date de rendu :</strong> {moment(assign.end_date).locale('fr').format('dddd Do MMMM YYYY')}
+                </p>
+              </ListItem>
+              {tasksToDisplay[tasksToDisplay.length - 1] !== assign && <Divider />}
+            </>
           ))}
         </List>
       </Fade>

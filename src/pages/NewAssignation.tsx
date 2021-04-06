@@ -56,7 +56,7 @@ const NewAssignation = (): JSX.Element => {
 
   return (
     <div>
-      <Header label="Assigner un devoir à uune classe" />
+      <Header label="Assigner un devoir à une classe" />
       <TaskAssignationForm
         tasks={tasks}
         assignation={assignation}

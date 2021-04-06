@@ -12,7 +12,7 @@ interface CalendarDailyTasksProps {
   handleClose: OnClick;
 }
 
-const CalendarDailyTasks = ({ tasksToDisplay, open, handleClose }: CalendarDailyTasksProps): JSX.Element => {
+const CalendarDailyTasksModal = ({ tasksToDisplay, open, handleClose }: CalendarDailyTasksProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -48,4 +48,4 @@ const CalendarDailyTasks = ({ tasksToDisplay, open, handleClose }: CalendarDaily
   );
 };
 
-export default CalendarDailyTasks;
+export default CalendarDailyTasksModal;

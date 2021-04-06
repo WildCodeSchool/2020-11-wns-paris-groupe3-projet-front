@@ -28,7 +28,7 @@ describe('Home', () => {
   });
 
   describe('if already registered user', () => {
-    it('renders register form', () => {
+    it('renders login form', () => {
       const historyMock = useHistory();
       render(
         <MockedProvider>

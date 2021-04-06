@@ -1,14 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress } from '@material-ui/core';
 
 import UploadBox from './UploadBox';
 
 import { FormProps } from '../types';
 
-import { TextInput, Form, Error } from '../styles/form';
+import { TextInput, Form, Error, ButtonForm } from '../styles/form';
 
 const FormUploadFile = ({
   file,
@@ -38,13 +36,12 @@ const FormUploadFile = ({
         {isLoading ? (
           <CircularProgress size={24} />
         ) : (
-          <Button
+          <ButtonForm
             type="submit"
-            startIcon={<SaveOutlinedIcon />}
             disabled={file.url.length === 0 || (fileKey === 'taskname' && fileKey.length === 0)}
           >
             Créer
-          </Button>
+          </ButtonForm>
         )}
         {error && <Error>Quelque chose s'est mal passé. Veuillez recommencer.</Error>}
       </Form>

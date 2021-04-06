@@ -2,7 +2,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import Planning from '../components/Planning';
+import NewAssignation from '../pages/NewAssignation';
 import { TASK_ASSIGNATIONS, ALL_TASKS, CLASSROOMS } from '../queries';
 
 const ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK = {
@@ -132,18 +132,19 @@ const ALL_TASKS_ERROR_MOCK = {
 };
 
 describe('App', () => {
-  describe('while fetching tasks assignations', () => {
-    it('renders loading', () => {
+  describe('when we are into new assignation page', () => {
+    it('renders form', async () => {
       render(
         <MockedProvider
           mocks={[ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK, ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]}
           addTypename={false}
         >
-          <Planning />
+          <NewAssignation />
         </MockedProvider>,
       );
 
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      const form = await waitFor(() => screen.getByRole('form'));
+      expect(form).toBeInTheDocument();
     });
   });
 
@@ -151,7 +152,7 @@ describe('App', () => {
     it('renders error', async () => {
       render(
         <MockedProvider mocks={[ALL_TASK_ASSIGNATIONS_ERROR_MOCK, ALL_CLASSROOMS_ERROR_MOCK, ALL_TASKS_ERROR_MOCK]}>
-          <Planning />
+          <NewAssignation />
         </MockedProvider>,
       );
 

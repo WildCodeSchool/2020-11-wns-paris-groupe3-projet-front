@@ -25,7 +25,7 @@ const Register = ({ history }: HistoryType): JSX.Element => {
     update(_, { data: { register: user } }) {
       const userData = { user };
       dispatch.loginData(userData);
-      history.push('/planning');
+      history.push('/dashboard');
     },
     variables: { input: values },
     onError(err) {

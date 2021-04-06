@@ -5,6 +5,7 @@ import theme from '../theme';
 
 type ButtonProps = {
   type: string;
+  disabled?: boolean;
 };
 
 export const Form = styled.form`
@@ -41,10 +42,15 @@ const ButtonValidate = `
   }
 `;
 
+const ButtonDisabled = `
+  border-color: grey;
+  color: white;
+`;
+
 export const ButtonForm = styled(Button)<ButtonProps>`
   border: 2px solid ${theme.palette.primary.main};
   color: ${theme.palette.primary.main};
   outline: none;
   cursor: pointer;
-  ${({ type }) => type === 'submit' && ButtonValidate}
+  ${({ disabled, type }) => (disabled && type === 'submit' && ButtonDisabled) || (type === 'submit' && ButtonValidate)}
 `;

@@ -21,7 +21,7 @@ const Login = ({ history }: HistoryType): JSX.Element => {
   const [login] = useMutation(LOGIN_USER, {
     update(_, { data: { login: userData } }) {
       dispatch.loginData({ user: userData });
-      history.push('/planning');
+      history.push('/dashboard');
     },
     variables: values,
     onError(err) {

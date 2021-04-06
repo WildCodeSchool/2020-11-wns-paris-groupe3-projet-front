@@ -3,6 +3,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import App from '../App';
+import NewAssignation from '../pages/NewAssignation';
 import { TASK_ASSIGNATIONS, ALL_TASKS, CLASSROOMS } from '../queries';
 
 const ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK = {
@@ -128,18 +129,19 @@ const ALL_TASKS_ERROR_MOCK = {
 };
 
 describe('App', () => {
-  describe('while fetching tasks assignations', () => {
-    it('renders loading', () => {
+  describe('when we are into new assignation page', () => {
+    it('renders form', async () => {
       render(
         <MockedProvider
           mocks={[ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK, ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]}
           addTypename={false}
         >
-          <App />
+          <NewAssignation />
         </MockedProvider>,
       );
 
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      const form = await waitFor(() => screen.getByRole('form'));
+      expect(form).toBeInTheDocument();
     });
   });
 
@@ -153,21 +155,6 @@ describe('App', () => {
 
       const errorMessage = await waitFor(() => screen.getByText('Error...'));
       expect(errorMessage).toBeInTheDocument();
-    });
-  });
-
-  describe('when fetching tasks assignations succeeded', () => {
-    it('renders list with tasks', async () => {
-      render(
-        <MockedProvider
-          mocks={[ALL_TASK_ASSIGNATIONS_SUCCESS_MOCK, ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]}
-        >
-          <App />
-        </MockedProvider>,
-      );
-
-      const listTitle = await waitFor(() => screen.getByText('Liste des devoirs assignés :'));
-      expect(listTitle).toBeInTheDocument();
     });
   });
 });

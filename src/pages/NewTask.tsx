@@ -2,17 +2,17 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
 
-import FormUploadFile from './FormUploadFile';
-import Header from './Header';
+import FormUploadFile from '../components/FormUploadFile';
+import Header from '../components/Header';
 
-import { NewTask, HandleChange, HandleSubmit } from '../types';
+import { NewTaskType, HandleChange, HandleSubmit } from '../types';
 import { CREATE_TASK } from '../queries';
 
-const CreationTask = (): JSX.Element => {
+const NewTask = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [task, setTask] = useState<NewTask>({
+  const [task, setTask] = useState<NewTaskType>({
     taskname: '',
     url: '',
   });
@@ -79,4 +79,4 @@ const CreationTask = (): JSX.Element => {
   );
 };
 
-export default CreationTask;
+export default NewTask;

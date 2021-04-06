@@ -20,24 +20,24 @@ export type TaskAssignation = {
   affectedTo: Classroom;
 };
 
-export type NewAssignation = {
+export type NewAssignationType = {
   task: string;
   end_date: string;
   affectedTo: string;
 };
 
-export type NewTask = {
+export type NewTaskType = {
   taskname: string;
   url: string;
 };
 
-export type NewRender = {
+export type NewRenderType = {
   url: string;
   taskId: string;
   userId: string;
 };
 
-export type NewCorrection = {
+export type NewCorrectionType = {
   url: string;
   taskId: string;
   userId: string;
@@ -61,7 +61,7 @@ export interface HeaderProps {
 }
 
 export interface FormProps {
-  file: NewTask | NewRender | NewCorrection;
+  file: NewTaskType | NewRenderType | NewCorrectionType;
   handleChange: HandleChange;
   handleSubmit: HandleSubmit;
   isLoading: boolean;
@@ -72,7 +72,7 @@ export interface FormProps {
 }
 
 export interface UploadBoxProps {
-  file: NewTask | NewRender | NewCorrection;
+  file: NewTaskType | NewRenderType | NewCorrectionType;
   fileType: string;
   getRootProps: GetRootProps;
   getInputProps: GetInputProps;

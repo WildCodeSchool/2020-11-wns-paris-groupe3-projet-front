@@ -47,10 +47,14 @@ export const CLASSROOMS = gql`
       classname
       users {
         _id
-        username
-        speciality
+        firstname
+        lastname
+        email
+        speciality {
+          speciality_name
+        }
         role {
-          _id
+          role_name
         }
       }
     }
@@ -85,6 +89,32 @@ export const CREATE_CORRECTION = gql`
       task
       url
       user
+    }
+  }
+`;
+
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      _id
+      firstname
+      lastname
+      email
+      creation_date
+      token
+    }
+  }
+`;
+
+export const REGISTER_USER = gql`
+  mutation register($input: InputRegister!) {
+    register(input: $input) {
+      _id
+      firstname
+      lastname
+      email
+      creation_date
+      token
     }
   }
 `;

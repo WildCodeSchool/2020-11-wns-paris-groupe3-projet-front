@@ -1,3 +1,4 @@
+import { History, LocationState } from 'history';
 import { DropzoneRootProps, DropzoneInputProps } from 'react-dropzone';
 
 // Objects
@@ -41,6 +42,14 @@ export type NewCorrectionType = {
   url: string;
   taskId: string;
   userId: string;
+};
+
+export type HistoryType = {
+  history: History<LocationState>;
+};
+
+export type ErrorType = {
+  errors: { [key: string]: string };
 };
 
 // Functions

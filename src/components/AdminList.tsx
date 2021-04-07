@@ -1,50 +1,64 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import { UserType } from '../types';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+import { TableTop, Cell, Edit, Delete } from '../styles/admin-list';
 
 interface AdminListProps {
   data: UserType[];
 }
 
 const AdminList = ({ data }: AdminListProps): JSX.Element => {
-  const classes = useStyles();
+  if (data.length > 0) return <p>nada</p>;
+
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+      <Table aria-label="simple table">
+        <TableTop>
           <TableRow>
+            <TableCell align="left">
+              <Checkbox />
+            </TableCell>
             {Object.keys(data[0]).map((k) => (
-              <TableCell key={k} align="center">
+              <Cell key={k} align="center">
                 {k}
-              </TableCell>
+              </Cell>
             ))}
+            <Cell align="center">Editer</Cell>
+            <Cell align="center">Supprimer</Cell>
           </TableRow>
-        </TableHead>
+        </TableTop>
         <TableBody>
-          {data.length > 0 &&
-            data.map((d) => (
-              <TableRow key={d.id}>
-                {Object.values(d).map((df) => (
-                  <TableCell key={df} align="center">
-                    {df}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
+          {data.map((d) => (
+            <TableRow key={d.id}>
+              <TableCell align="left">
+                <Checkbox />
+              </TableCell>
+              {Object.values(d).map((df) => (
+                <TableCell key={df} align="center">
+                  {df}
+                </TableCell>
+              ))}
+              <TableCell align="center">
+                <IconButton aria-label="edit">
+                  <Edit />
+                </IconButton>
+              </TableCell>
+              <TableCell align="center">
+                <IconButton aria-label="delete">
+                  <Delete />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

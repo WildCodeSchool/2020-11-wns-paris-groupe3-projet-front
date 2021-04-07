@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 import Header from '../components/Header';
 import AdminList from '../components/AdminList';
@@ -10,7 +11,7 @@ const users = [
     lastname: 'Durand',
     role: 'teacher',
     created_at: '12/12/2020',
-    status: 'in process',
+    status: 'in progress',
   },
   {
     id: '2',
@@ -34,6 +35,7 @@ const DashboardAdmin = (): JSX.Element => {
   return (
     <div>
       <Header label={'Mon tableau de bord'} />
+      <Button>Ajouter un.e nouvel.le utilisateur.rice</Button>
       <AdminList data={users} />
     </div>
   );

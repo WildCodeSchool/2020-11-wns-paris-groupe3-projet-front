@@ -52,6 +52,15 @@ export type ErrorType = {
   errors: { [key: string]: string };
 };
 
+export type UserType = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  role: string;
+  created_at: string;
+  status: string;
+};
+
 // Functions
 export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
 export type HandleChangeDate = (e: React.ChangeEvent<HTMLInputElement> | Date | null) => void;

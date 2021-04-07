@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Redirect, RouteComponentProps } from 'r
 
 import { AuthProvider, AuthContext } from './context/auth-context';
 
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import NewAssignation from './pages/NewAssignation';
-import NewTask from './pages/NewTask';
+import Home from './components/pages/Home';
+import Dashboard from './components/pages/Dashboard';
+import NewAssignation from './components/pages/NewAssignation';
+import NewTask from './components/pages/NewTask';
 
 type CompProps = {
   component: ComponentType<RouteComponentProps>;

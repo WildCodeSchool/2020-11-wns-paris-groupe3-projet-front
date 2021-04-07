@@ -2,7 +2,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import CreationTask from '../pages/NewTask';
+import CreationTask from '../components/pages/NewTask';
 
 import { CREATE_TASK } from '../queries';
 

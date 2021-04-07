@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { OnClick, HistoryType } from '../types';
+import { OnClick, HistoryType } from '../../types';
 
-import Login from '../components/Login';
-import Register from '../components/Register';
-import logo from '../assets/logoEH.svg';
+import Login from '../Login';
+import Register from '../Register';
+import logo from '../../assets/logoEH.svg';
 
 import {
   ButtonChangeForm,
@@ -13,7 +13,7 @@ import {
   ContainerHomeLogo,
   LogoHome,
   TitleHome,
-} from '../styles/auth-form';
+} from '../../styles/auth-form';
 
 const Home = ({ history }: HistoryType): JSX.Element => {
   const [alreadyRegister, setAlreadyRegister] = useState(true);

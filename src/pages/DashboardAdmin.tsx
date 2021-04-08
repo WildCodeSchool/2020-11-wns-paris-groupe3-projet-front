@@ -9,17 +9,6 @@ import { USERS } from '../queries';
 
 import { ButtonLink } from '../styles/dashboard';
 
-// const users = [
-//   {
-//     id: '1',
-//     firstname: 'Sophie',
-//     lastname: 'Durand',
-//     role: 'teacher',
-//     created_at: '12/12/2020',
-//     status: true,
-//   },
-// ];
-
 const DashboardAdmin = (): JSX.Element => {
   const { loading, error, data } = useQuery(USERS);
   if (loading) return <p>Loading</p>;

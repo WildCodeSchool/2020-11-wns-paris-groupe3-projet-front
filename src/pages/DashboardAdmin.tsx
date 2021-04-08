@@ -1,42 +1,37 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 
 import Header from '../components/Header';
 import AdminList from '../components/AdminList';
 
-const users = [
-  {
-    id: '1',
-    firstname: 'Sophie',
-    lastname: 'Durand',
-    role: 'teacher',
-    created_at: '12/12/2020',
-    status: 'in progress',
-  },
-  {
-    id: '2',
-    firstname: 'Jean',
-    lastname: 'Dupont',
-    role: 'student',
-    created_at: '25/01/2021',
-    status: 'registered',
-  },
-  {
-    id: '3',
-    firstname: 'Sonia',
-    lastname: 'Allouche',
-    role: 'admin',
-    created_at: '14/02/2021',
-    status: 'registered',
-  },
-];
+import { USERS } from '../queries';
+
+import { ButtonLink } from '../styles/dashboard';
+
+// const users = [
+//   {
+//     id: '1',
+//     firstname: 'Sophie',
+//     lastname: 'Durand',
+//     role: 'teacher',
+//     created_at: '12/12/2020',
+//     status: true,
+//   },
+// ];
 
 const DashboardAdmin = (): JSX.Element => {
+  const { loading, error, data } = useQuery(USERS);
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>Error</p>;
+
   return (
     <div>
       <Header label={'Mon tableau de bord'} />
-      <Button>Ajouter un.e nouvel.le utilisateur.rice</Button>
-      <AdminList data={users} />
+      <Button variant="contained" color="secondary">
+        <ButtonLink to="">Ajouter un.e nouvel.le utilisateur.rice</ButtonLink>
+      </Button>
+      <AdminList data={data.users} />
     </div>
   );
 };

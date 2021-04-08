@@ -52,13 +52,18 @@ export type ErrorType = {
   errors: { [key: string]: string };
 };
 
+export type RoleType = {
+  _id: string;
+  role_name: string;
+};
+
 export type UserType = {
-  id: string;
+  _id: string;
   firstname: string;
   lastname: string;
-  role: string;
-  created_at: string;
-  status: string;
+  role: RoleType;
+  creation_date: string;
+  status: boolean;
 };
 
 // Functions

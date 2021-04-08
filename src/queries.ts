@@ -118,3 +118,18 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+export const USERS = gql`
+  query users {
+    users {
+      _id
+      firstname
+      lastname
+      role {
+        role_name
+      }
+      creation_date
+      status
+    }
+  }
+`;

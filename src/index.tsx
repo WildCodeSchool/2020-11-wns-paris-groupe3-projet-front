@@ -9,7 +9,9 @@ import theme from './theme';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_URL,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
 });
 
 ReactDOM.render(

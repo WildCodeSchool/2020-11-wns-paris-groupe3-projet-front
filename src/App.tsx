@@ -5,6 +5,7 @@ import { AuthProvider, AuthContext } from './context/auth-context';
 
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import DashboardAdmin from './pages/DashboardAdmin';
 import NewAssignation from './pages/NewAssignation';
 import NewTask from './pages/NewTask';
 
@@ -28,6 +29,7 @@ const App = (): JSX.Element => {
         <AuthRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/task" component={NewTask} />
         <Route exact path="/assignation" component={NewAssignation} />
+        <Route exact path="/dashboardadmin" component={DashboardAdmin} />
       </AuthProvider>
     </Router>
   );

@@ -1,10 +1,12 @@
 import React from 'react';
+
+import { FirstHeader } from '../styles/header';
 interface HeaderProps {
   label: string;
 }
 
 const Header = ({ label }: HeaderProps): JSX.Element => {
-  return <h1>{label}</h1>;
+  return <FirstHeader>{label}</FirstHeader>;
 };
 
 export default Header;

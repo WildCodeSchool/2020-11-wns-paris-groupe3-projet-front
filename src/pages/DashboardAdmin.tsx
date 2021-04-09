@@ -2,9 +2,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import Button from '@material-ui/core/Button';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import { GridColDef, GridCellParams } from '@material-ui/data-grid';
+import { GridColDef } from '@material-ui/data-grid';
 
 import Header from '../components/Header';
 import SubHeader from '../components/SubHeader';
@@ -12,7 +10,8 @@ import DataList from '../components/DataList';
 
 import { USERS } from '../queries';
 
-import { ButtonLink } from '../styles/dashboard';
+import { ButtonLink, Container } from '../styles/dashboard';
+import { Edit, Delete } from '../styles/data-list';
 
 const DashboardAdmin = (): JSX.Element => {
   const { loading, error, data } = useQuery(USERS);
@@ -28,10 +27,10 @@ const DashboardAdmin = (): JSX.Element => {
       field: 'edit',
       headerName: 'Editer',
       width: 200,
-      renderCell: (params: GridCellParams) => (
+      renderCell: () => (
         <strong>
           <Button size="small">
-            <EditOutlinedIcon />
+            <Edit />
           </Button>
         </strong>
       ),
@@ -40,10 +39,10 @@ const DashboardAdmin = (): JSX.Element => {
       field: 'delete',
       headerName: 'Supprimer',
       width: 200,
-      renderCell: (params: GridCellParams) => (
+      renderCell: () => (
         <strong>
           <Button size="small">
-            <DeleteOutlineOutlinedIcon />
+            <Delete />
           </Button>
         </strong>
       ),
@@ -56,10 +55,14 @@ const DashboardAdmin = (): JSX.Element => {
   return (
     <div>
       <Header label="Mon tableau de bord" />
-      <SubHeader title="Tous.tes les utilisateurs.trices" />
-      <Button variant="contained" color="secondary">
-        <ButtonLink to="">Ajouter un.e nouvel.le utilisateur.rice</ButtonLink>
-      </Button>
+      <Container>
+        <SubHeader title="Tous.tes les utilisateurs.trices" />
+        {data.users.length > 0 && (
+          <Button variant="contained" color="secondary">
+            <ButtonLink to="">Ajouter un.e nouvel.le utilisateur.rice</ButtonLink>
+          </Button>
+        )}
+      </Container>
       <DataList data={data.users} columns={columns} />
     </div>
   );

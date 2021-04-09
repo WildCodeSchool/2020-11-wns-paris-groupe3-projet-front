@@ -1,6 +1,7 @@
 import React from 'react';
-
-import { HeaderProps } from '../types';
+interface HeaderProps {
+  label: string;
+}
 
 const Header = ({ label }: HeaderProps): JSX.Element => {
   return <h1>{label}</h1>;

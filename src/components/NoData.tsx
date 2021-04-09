@@ -1,7 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 
-import { ButtonLink } from '../styles/dashboard';
+import LinkButton from '../components/LinkButton';
 
 import { ContainerCenter, Title } from '../styles/data-list';
 
@@ -13,9 +12,7 @@ const NoData = ({ title }: NoDataProps): JSX.Element => {
   return (
     <ContainerCenter>
       <Title>{title}</Title>
-      <Button variant="contained" color="secondary">
-        <ButtonLink to="/">C&apos;est par ici !</ButtonLink>
-      </Button>
+      <LinkButton to="/" label="Cest par ici !" color="secondary" />
     </ContainerCenter>
   );
 };

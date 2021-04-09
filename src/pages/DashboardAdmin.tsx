@@ -1,17 +1,17 @@
 /* eslint-disable react/display-name */
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Button from '@material-ui/core/Button';
 import { GridColDef } from '@material-ui/data-grid';
 
 import Header from '../components/Header';
 import SubHeader from '../components/SubHeader';
 import DataList from '../components/DataList';
+import IconButton from '../components/IconButton';
+import LinkButton from '../components/LinkButton';
 
 import { USERS } from '../queries';
 
-import { ButtonLink, Container } from '../styles/dashboard';
-import { Edit, Delete } from '../styles/data-list';
+import { Container } from '../styles/dashboard';
 
 const DashboardAdmin = (): JSX.Element => {
   const { loading, error, data } = useQuery(USERS);
@@ -27,25 +27,13 @@ const DashboardAdmin = (): JSX.Element => {
       field: 'edit',
       headerName: 'Editer',
       width: 200,
-      renderCell: () => (
-        <strong>
-          <Button size="small">
-            <Edit />
-          </Button>
-        </strong>
-      ),
+      renderCell: () => <IconButton type="edit" />,
     },
     {
       field: 'delete',
       headerName: 'Supprimer',
       width: 200,
-      renderCell: () => (
-        <strong>
-          <Button size="small">
-            <Delete />
-          </Button>
-        </strong>
-      ),
+      renderCell: () => <IconButton type="delete" />,
     },
   ];
 
@@ -58,9 +46,7 @@ const DashboardAdmin = (): JSX.Element => {
       <Container>
         <SubHeader title="Tous.tes les utilisateurs.trices" />
         {data.users.length > 0 && (
-          <Button variant="contained" color="secondary">
-            <ButtonLink to="">Ajouter un.e nouvel.le utilisateur.rice</ButtonLink>
-          </Button>
+          <LinkButton to="/" label="Ajouter un.e nouvel.le utilisateur.rice" color="secondary" />
         )}
       </Container>
       <DataList data={data.users} columns={columns} />

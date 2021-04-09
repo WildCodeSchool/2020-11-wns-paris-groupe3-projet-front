@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from '@material-ui/data-grid';
 
 import NoData from './NoData';
 
-import { UserType } from '../types';
+import { UserType, FormattedType } from '../types';
 
 import { Container } from '../styles/data-list';
 
@@ -15,12 +15,12 @@ interface DataListProps {
 }
 
 const DataList = ({ data, columns }: DataListProps): JSX.Element => {
-  const [formatedData, setFormatedData] = useState<UserType[]>([]);
+  const [formattedData, setFormattedData] = useState<FormattedType[]>([]);
 
   useEffect(() => {
-    const dataTemp: UserType[] = [];
+    const dataTemp: FormattedType[] = [];
     data.length > 0 &&
-      data.map((d: any) => {
+      data.map((d) => {
         return dataTemp.push({
           ...d,
           id: d._id,
@@ -28,13 +28,13 @@ const DataList = ({ data, columns }: DataListProps): JSX.Element => {
           creation_date: format(new Date(d.creation_date), 'dd-MM-yyyy'),
         });
       });
-    setFormatedData(dataTemp);
+    setFormattedData(dataTemp);
   }, []);
 
   return (
     <Container>
       {data.length > 0 ? (
-        <DataGrid rows={formatedData} columns={columns} pageSize={5} />
+        <DataGrid rows={formattedData} columns={columns} pageSize={5} />
       ) : (
         <NoData title="Pour commencer à ajouter des utilisateurs" />
       )}

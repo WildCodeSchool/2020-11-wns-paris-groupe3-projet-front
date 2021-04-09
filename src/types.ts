@@ -59,9 +59,19 @@ export type RoleType = {
 
 export type UserType = {
   _id: string;
+  id: string;
   firstname: string;
   lastname: string;
   role: RoleType;
+  creation_date: string;
+  status: boolean;
+};
+
+export type FormattedType = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  role: string;
   creation_date: string;
   status: boolean;
 };

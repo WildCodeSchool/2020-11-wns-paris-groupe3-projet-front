@@ -14,6 +14,9 @@ export const ContainerCenter = styled.div`
   top: 50%;
   transform: perspective(1px) translateY(-50%);
   text-align: center;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.p`

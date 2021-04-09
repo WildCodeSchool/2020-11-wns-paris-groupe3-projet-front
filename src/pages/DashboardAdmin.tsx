@@ -14,7 +14,7 @@ import { ButtonLink, Container } from '../styles/dashboard';
 import { Edit, Delete } from '../styles/data-list';
 
 const DashboardAdmin = (): JSX.Element => {
-  const { loading, error, data } = useQuery(USERS);
+  // const { loading, error, data } = useQuery(USERS);
 
   const columns: GridColDef[] = [
     { field: '_id', headerName: 'ID', width: 200 },
@@ -49,8 +49,10 @@ const DashboardAdmin = (): JSX.Element => {
     },
   ];
 
-  if (loading) return <p>Loading</p>;
-  if (error) return <p>Error</p>;
+  // if (loading) return <p>Loading</p>;
+  // if (error) return <p>Error</p>;
+
+  const data = { users: [] };
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
 import Header from '../components/Header';
@@ -6,8 +6,10 @@ import TaskAssignationForm from '../components/TaskAssignationForm';
 
 import { NewAssignationType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
+import { AuthContext } from '../context/auth-context';
 
 const NewAssignation = (): JSX.Element => {
+  const { state } = useContext(AuthContext);
   const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);
   const { loading: classroomsQueryLoading, error: classroomsQueryError, data: classroomsQueryData } = useQuery(
     CLASSROOMS,
@@ -56,7 +58,7 @@ const NewAssignation = (): JSX.Element => {
 
   return (
     <div>
-      <Header label="Assigner un devoir à une classe" />
+      <Header label="Assigner un devoir à une classe" firstname={state.user.firstname} lastname={state.user.lastname} />
       <TaskAssignationForm
         tasks={tasks}
         assignation={assignation}

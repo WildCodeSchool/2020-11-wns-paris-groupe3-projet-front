@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button, ButtonGroup } from '@material-ui/core/';
 
@@ -6,10 +6,12 @@ import Calendar from '../components/Calendar';
 import Header from '../components/Header';
 
 import { TASK_ASSIGNATIONS } from '../queries';
+import { AuthContext } from '../context/auth-context';
 
 import { Container, ButtonLink } from '../styles/dashboard';
 
 const Dashboard = (): JSX.Element => {
+  const { state } = useContext(AuthContext);
   const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
     TASK_ASSIGNATIONS,
   );
@@ -21,7 +23,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <div>
-      <Header label="Tableau de bord" />
+      <Header label="Tableau de bord" firstname={state.user.firstname} lastname={state.user.lastname} />
       <Container>
         <div>
           <ButtonGroup variant="contained" color="primary">

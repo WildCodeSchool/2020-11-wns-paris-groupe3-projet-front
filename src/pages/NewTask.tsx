@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
 
@@ -7,8 +7,10 @@ import Header from '../components/Header';
 
 import { NewTaskType, HandleChange, HandleSubmit } from '../types';
 import { CREATE_TASK } from '../queries';
+import { AuthContext } from '../context/auth-context';
 
 const NewTask = (): JSX.Element => {
+  const { state } = useContext(AuthContext);
   const [createTask] = useMutation(CREATE_TASK);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -64,7 +66,7 @@ const NewTask = (): JSX.Element => {
 
   return (
     <div>
-      <Header label="Créer un nouveau devoir" />
+      <Header label="Créer un nouveau devoir" firstname={state.user.firstname} lastname={state.user.lastname} />
       <FormUploadFile
         file={task}
         handleChange={handleChange}

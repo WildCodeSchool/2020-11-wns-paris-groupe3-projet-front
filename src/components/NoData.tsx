@@ -14,7 +14,7 @@ const NoData = ({ title }: NoDataProps): JSX.Element => {
     <ContainerCenter>
       <Title>{title}</Title>
       <Button variant="contained" color="secondary">
-        <ButtonLink to="">C&apos;est par ici !</ButtonLink>
+        <ButtonLink to="/">C&apos;est par ici !</ButtonLink>
       </Button>
     </ContainerCenter>
   );

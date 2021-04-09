@@ -21,7 +21,6 @@ const DataList = ({ data, columns }: DataListProps): JSX.Element => {
     const dataTemp: UserType[] = [];
     data.length > 0 &&
       data.map((d: any) => {
-        console.log(d);
         return dataTemp.push({
           ...d,
           id: d._id,

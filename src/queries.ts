@@ -61,6 +61,24 @@ export const CLASSROOMS = gql`
   }
 `;
 
+export const CLASSROOMS_BY_USER_ID = gql`
+  query ClassroomByUserId($_id: ID!) {
+    classroomByUserId(_id: $_id) {
+      _id
+      classname
+      users {
+        _id
+        firstname
+        lastname
+        role {
+          _id
+          role_name
+        }
+      }
+    }
+  }
+`;
+
 export const CREATE_TASK = gql`
   mutation CreateTask($input: InputTask!) {
     createTask(input: $input) {

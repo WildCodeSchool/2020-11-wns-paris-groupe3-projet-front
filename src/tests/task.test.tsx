@@ -2,7 +2,8 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import NewTask from '../pages/NewTask';
+import FormUploadFile from '../components/FormUploadFile';
+import UploadBox from '../components/UploadBox';
 
 import { CREATE_TASK } from '../queries';
 
@@ -26,47 +27,111 @@ const NEW_TASK_SUCCESS_MOCK = {
   },
 };
 
-describe('NewTask', () => {
+const handleChange = jest.fn();
+const handleSubmit = jest.fn();
+const getRootProps = jest.fn();
+const getInputProps = jest.fn();
+const isDragActive = false;
+const isLoading = false;
+
+describe('FormUploadFile', () => {
   describe('When on creation page', () => {
-    it('should render header', () => {
+    it('should render info on accepted files', () => {
+      const task = {
+        _id: '1',
+        taskname: 'mytask',
+        url: 'myurl',
+      };
+      const error = false;
       render(
         <MockedProvider>
-          <NewTask />
+          <FormUploadFile
+            file={task}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            error={error}
+            getRootProps={getRootProps}
+            getInputProps={getInputProps}
+            isDragActive={isDragActive}
+          />
         </MockedProvider>,
       );
 
-      const header = screen.getByText('Créer un nouveau devoir');
-      expect(header).toBeInTheDocument();
+      const infos = screen.getByText('Fichiers acceptés : .pdf, .doc et .docx');
+      expect(infos).toBeInTheDocument();
     });
 
-    it('should render text input label', () => {
+    it('should render erro text', () => {
+      const task = {
+        _id: '1',
+        taskname: 'mytask',
+        url: 'myurl',
+      };
+      const error = true;
       render(
         <MockedProvider>
-          <NewTask />
+          <FormUploadFile
+            file={task}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            error={error}
+            getRootProps={getRootProps}
+            getInputProps={getInputProps}
+            isDragActive={isDragActive}
+          />
         </MockedProvider>,
       );
 
-      const textInput = screen.getByText('Titre du devoir');
-      expect(textInput).toBeInTheDocument();
+      const texterror = screen.getByText("Quelque chose s'est mal passé. Veuillez recommencer.");
+      expect(texterror).toBeInTheDocument();
     });
 
     it('should render upload box text', () => {
+      const file = {
+        taskname: 'mytask',
+        url: 'myurl',
+      };
       render(
         <MockedProvider>
-          <NewTask />
+          <UploadBox
+            file={file}
+            fileType="devoir"
+            getRootProps={getRootProps}
+            getInputProps={getInputProps}
+            isDragActive={isDragActive}
+          />
         </MockedProvider>,
       );
 
-      const textInput = screen.getByText('Glisser votre devoir ici, ou cliquer pour le sélectionner. *');
+      const textInput = screen.getByText(
+        'Votre devoir est sélectionné. Glisser votre devoir ici, ou cliquer pour le modifier.',
+      );
       expect(textInput).toBeInTheDocument();
     });
   });
 
   describe('when creating task succeeded', () => {
     it('should render the form and the submit button', async () => {
+      const task = {
+        _id: '1',
+        taskname: 'mytask',
+        url: 'myurl',
+      };
+      const error = false;
       render(
         <MockedProvider mocks={[NEW_TASK_SUCCESS_MOCK]} addTypename={false}>
-          <NewTask />
+          <FormUploadFile
+            file={task}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            error={error}
+            getRootProps={getRootProps}
+            getInputProps={getInputProps}
+            isDragActive={isDragActive}
+          />
         </MockedProvider>,
       );
 

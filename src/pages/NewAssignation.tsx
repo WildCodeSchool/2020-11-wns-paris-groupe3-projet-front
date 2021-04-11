@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import Header from '../Header';
-import TaskAssignationForm from '../TaskAssignationForm';
+import Header from '../components/Header';
+import TaskAssignationForm from '../components/TaskAssignationForm';
 
-import { NewAssignationType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../../types';
-import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../../queries';
+import { NewAssignationType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
+import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
 
 const NewAssignation = (): JSX.Element => {
   const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);

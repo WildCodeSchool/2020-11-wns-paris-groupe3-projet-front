@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Redirect, RouteComponentProps } from 'r
 
 import { AuthProvider, AuthContext } from './context/auth-context';
 
-import Home from './components/pages/Home';
-import Dashboard from './components/pages/Dashboard';
-import NewAssignation from './components/pages/NewAssignation';
-import NewTask from './components/pages/NewTask';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import NewAssignation from './pages/NewAssignation';
+import NewTask from './pages/NewTask';
+import OnboardingContainer from './pages/Onboarding';
 
 type CompProps = {
   component: ComponentType<RouteComponentProps>;
@@ -25,9 +26,10 @@ const App = (): JSX.Element => {
     <Router>
       <AuthProvider>
         <Route exact path="/" component={Home} />
-        <AuthRoute exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/task" component={NewTask} />
         <Route exact path="/assignation" component={NewAssignation} />
+        <AuthRoute exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/onboarding" component={OnboardingContainer} />
+        <Route exact path="/task" component={NewTask} />
       </AuthProvider>
     </Router>
   );

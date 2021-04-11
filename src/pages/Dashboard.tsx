@@ -2,12 +2,12 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Button, ButtonGroup } from '@material-ui/core/';
 
-import Calendar from '../Calendar';
-import Header from '../Header';
+import Calendar from '../components/Calendar';
+import Header from '../components/Header';
 
-import { TASK_ASSIGNATIONS } from '../../queries';
+import { TASK_ASSIGNATIONS } from '../queries';
 
-import { Container, ButtonLink } from '../../styles/dashboard';
+import { Container, ButtonLink } from '../styles/dashboard';
 
 const Dashboard = (): JSX.Element => {
   const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(

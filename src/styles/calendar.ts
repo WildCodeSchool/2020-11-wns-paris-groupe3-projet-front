@@ -11,7 +11,7 @@ type DayDivTaskProps = {
   hasEvent: boolean;
 };
 
-export const Container = styled.div`
+export const CalendarContainerStyled = styled.div`
   box-sizing: border-box;
   font-size: 1rem;
   width: 400px;

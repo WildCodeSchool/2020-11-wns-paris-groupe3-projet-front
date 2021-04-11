@@ -7,13 +7,13 @@ import CalendarHeader from './CalendarHeader';
 
 import { TaskAssignation } from '../../../../types';
 
-import { Container } from '../../../../styles/calendar';
+import { CalendarContainerStyled } from '../../../../styles/calendar';
 
 interface CalendarProps {
-  assignations: TaskAssignation[];
+  assignments: TaskAssignation[];
 }
 
-export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element => {
+export const CalendarContainer = ({ assignments }: CalendarProps): JSX.Element => {
   const [tasksToDisplay, setTasksToDisplay] = useState<TaskAssignation[]>([]);
   const [value, setValue] = useState(moment());
   const [calendar, setCalendar] = useState<Moment[][]>([]);
@@ -52,7 +52,7 @@ export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element 
 
   const hasEvent = (day: Moment) => {
     let result = false;
-    assignations.forEach((assign) => {
+    assignments.forEach((assign) => {
       if (day.isSame(new Date(assign.end_date), 'day')) {
         result = day.isSame(new Date(assign.end_date), 'day');
       }
@@ -61,7 +61,7 @@ export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element 
   };
 
   const displayTasks = (day: Moment) => {
-    const tasksToDisplayTmp = assignations.filter(
+    const tasksToDisplayTmp = assignments.filter(
       (assign) => moment(assign.end_date).format('YYYY-MM-DD') === day.format('YYYY-MM-DD'),
     );
     setValue(day);
@@ -88,7 +88,7 @@ export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element 
 
   return (
     <>
-      <Container>
+      <CalendarContainerStyled>
         <CalendarHeader
           currMonthName={currMonthName}
           currYear={currYear}
@@ -105,7 +105,7 @@ export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element 
           isSelected={isSelected}
           hasEvent={hasEvent}
         />
-      </Container>
+      </CalendarContainerStyled>
       {tasksToDisplay.length > 0 && (
         <CalendarDailyTasksModal tasksToDisplay={tasksToDisplay} open={open} handleClose={handleClose} />
       )}

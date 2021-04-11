@@ -21,7 +21,7 @@ export const DashboardContainer = (): JSX.Element => {
   return (
     <div>
       <Header label="Tableau de bord" />
-      <DashboardViewTeacher assignations={tasksAssignations} />
+      <DashboardViewTeacher assignments={tasksAssignations} />
       {/* Nav bar */}
     </div>
   );

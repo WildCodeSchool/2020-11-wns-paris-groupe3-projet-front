@@ -6,7 +6,7 @@ import UploadBox from './UploadBox';
 
 import { FormProps } from 'types';
 
-import { TextInput, Form, Error, ButtonForm } from '../styles/form';
+import { TextInput, Form, Error, ButtonForm } from 'styles/form';
 
 const FormUploadFile = ({
   file,

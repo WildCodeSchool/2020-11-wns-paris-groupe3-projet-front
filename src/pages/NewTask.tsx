@@ -6,7 +6,7 @@ import FormUploadFile from 'components/FormUploadFile';
 import Header from 'components/Header';
 
 import { NewTaskType, HandleChange, HandleSubmit } from 'types';
-import { CREATE_TASK } from '../queries';
+import { CREATE_TASK } from 'queries';
 
 const NewTask = (): JSX.Element => {
   const [createTask] = useMutation(CREATE_TASK);

@@ -85,7 +85,7 @@ const OnboardingFormCard = (): JSX.Element => {
             onSubmit={async (values) => {
               await sleep(3000);
               console.log('values', values);
-              // ici muraiton to create
+              // ici muraiton to create ajouter les choses de register
             }}
           >
             <OnboardingStep validationSchema={null} label="Vous">

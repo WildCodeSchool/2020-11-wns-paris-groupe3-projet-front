@@ -51,10 +51,10 @@ export const CLASSROOMS = gql`
         lastname
         email
         speciality {
-          speciality_name
+          _id
         }
         role {
-          role_name
+          _id
         }
       }
     }

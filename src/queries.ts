@@ -51,10 +51,10 @@ export const CLASSROOMS = gql`
         lastname
         email
         speciality {
-          speciality_name
+          _id
         }
         role {
-          role_name
+          _id
         }
       }
     }
@@ -102,6 +102,9 @@ export const LOGIN_USER = gql`
       email
       creation_date
       token
+      role {
+        role_name
+      }
     }
   }
 `;

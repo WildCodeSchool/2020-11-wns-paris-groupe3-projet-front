@@ -7,6 +7,9 @@ type MyToken = {
   email: string;
   firstname: string;
   lastname: string;
+  role: {
+    role_name: string;
+  };
 };
 
 type AuthState = {
@@ -16,6 +19,9 @@ type AuthState = {
     firstname: string;
     lastname: string;
     token: string;
+    role: {
+      role_name: string;
+    };
   };
 };
 
@@ -42,6 +48,9 @@ let initialState = {
     firstname: '',
     lastname: '',
     token: '',
+    role: {
+      role_name: '',
+    },
   },
 };
 
@@ -58,6 +67,7 @@ if (localStorage.getItem('jwtToken')) {
         email: decodedToken.email,
         firstname: decodedToken.firstname,
         lastname: decodedToken.lastname,
+        role: decodedToken.role,
         token: token,
       },
     };
@@ -74,6 +84,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
           email: action.payload.user.email,
           firstname: action.payload.user.firstname,
           lastname: action.payload.user.lastname,
+          role: action.payload.user.role,
           token: action.payload.user.token,
         },
       };
@@ -85,6 +96,9 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
           email: '',
           firstname: '',
           lastname: '',
+          role: {
+            role_name: '',
+          },
           token: '',
         },
       };

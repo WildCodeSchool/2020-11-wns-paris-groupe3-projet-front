@@ -4,8 +4,8 @@ import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@testing-library/react';
 import { useHistory } from 'react-router-dom';
 
-import Login from '../components/Login';
-import Register from '../components/Register';
+import Login from 'components/Login';
+import Register from 'components/Register';
 
 const mockHistoryPush = jest.fn();
 

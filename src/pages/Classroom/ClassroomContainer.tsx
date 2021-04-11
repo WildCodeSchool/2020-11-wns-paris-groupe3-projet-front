@@ -11,12 +11,12 @@ import { UserType } from '../../types';
 export const ClassroomContainer = (): JSX.Element => {
   const { state } = useContext(AuthContext);
   const { loading, error, data } = useQuery(CLASSROOMS_BY_USER_ID, { variables: { _id: state.user.id } });
-  const [usersByRole, setUserByRole] = useState<{ teachers: UserType[]; students: UserType[] }>();
+  const [usersByRole, setUserByRole] = useState<{ teachers: UserType[]; students: UserType[] } | undefined>();
 
   useEffect(() => {
     const teachersTemp: UserType[] = [];
     const studentsTemp: UserType[] = [];
-    !loading &&
+    data &&
       data.classroomByUserId.users.filter((user: UserType) => {
         if (user.role.role_name === 'Teacher') {
           teachersTemp.push(user);
@@ -26,11 +26,11 @@ export const ClassroomContainer = (): JSX.Element => {
         }
       });
     setUserByRole({ teachers: teachersTemp, students: studentsTemp });
-  }, []);
+  }, [data]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
-  console.log(usersByRole);
+
   return (
     <div>
       <Header label={data.classroomByUserId.classname} />

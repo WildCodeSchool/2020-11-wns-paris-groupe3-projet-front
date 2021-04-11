@@ -6,8 +6,7 @@ import ClassroomCard from './components/ClassroomCard';
 import { UserType } from '../../types';
 
 interface ClassroomViewProps {
-  // usersByRole: { teachers: UserType[]; students: UserType[] };
-  usersByRole: any;
+  usersByRole: { teachers: UserType[]; students: UserType[] } | undefined;
 }
 
 const ClassroomView = ({ usersByRole }: ClassroomViewProps): JSX.Element => {
@@ -15,15 +14,11 @@ const ClassroomView = ({ usersByRole }: ClassroomViewProps): JSX.Element => {
     <div>
       <Typography variant="h5">Equipe pédagogique</Typography>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {usersByRole.teachers.map((user: UserType) => (
-          <ClassroomCard key={user._id} user={user} />
-        ))}
+        {usersByRole && usersByRole.teachers.map((user: UserType) => <ClassroomCard key={user._id} user={user} />)}
       </div>
       <Typography variant="h5">Elèves</Typography>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {usersByRole.students.map((user: UserType) => (
-          <ClassroomCard key={user._id} user={user} />
-        ))}
+        {usersByRole && usersByRole.students.map((user: UserType) => <ClassroomCard key={user._id} user={user} />)}
       </div>
     </div>
   );

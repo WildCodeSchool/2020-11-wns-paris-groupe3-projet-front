@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Redirect, RouteComponentProps } from 'r
 import { AuthProvider, AuthContext } from 'context/auth-context';
 
 import Home from 'pages/Home';
-import DashboardAdmin from './pages/DashboardAdmin';
 import DashboardContainer from 'pages/Dashboard';
 import NewAssignation from 'pages/NewAssignation';
 import NewTask from 'pages/NewTask';
@@ -29,7 +28,6 @@ const App = (): JSX.Element => {
         <AuthRoute exact path="/dashboard" component={DashboardContainer} />
         <Route exact path="/task" component={NewTask} />
         <Route exact path="/assignation" component={NewAssignation} />
-        <Route exact path="/dashboardadmin" component={DashboardAdmin} />
       </AuthProvider>
     </Router>
   );

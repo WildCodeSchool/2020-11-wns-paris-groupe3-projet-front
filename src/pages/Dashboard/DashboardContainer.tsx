@@ -6,25 +6,26 @@ import DashboardViewTeacher from './DashboardViewTeacher';
 import DashboardViewStudent from './DashboardViewStudent';
 import DashboardViewAdmin from './DashboardViewAdmin';
 
-import { TASK_ASSIGNATIONS } from 'queries';
+import { ASSIGNMENTS, USERS } from 'queries';
 import { AuthContext } from '../../context/auth-context';
 
 export const DashboardContainer = (): JSX.Element => {
   const { state } = useContext(AuthContext);
-  const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
-    TASK_ASSIGNATIONS,
+  const { loading: assignmentQueryLoading, error: assignmentQueryError, data: assignmentQueryData } = useQuery(
+    ASSIGNMENTS,
   );
+  const { loading: usersQueryLoading, error: usersQueryError, data: usersQueryData } = useQuery(USERS);
 
-  if (assignationQueryLoading) return <p>Loading...</p>;
-  if (assignationQueryError) return <p>Error...</p>;
+  if (assignmentQueryLoading || usersQueryLoading) return <p>Loading...</p>;
+  if (assignmentQueryError || usersQueryError) return <p>Error...</p>;
 
-  const { tasksAssignations } = assignationQueryData;
+  const { assignments } = assignmentQueryData;
 
   return (
     <div>
       <Header label="Tableau de bord" />
-      {state.user.role.role_name === 'Teacher' && <DashboardViewTeacher assignments={tasksAssignations} />}
-      {state.user.role.role_name === 'Admin' && <DashboardViewAdmin />}
+      {state.user.role.role_name === 'Teacher' && <DashboardViewTeacher assignments={assignments} />}
+      {state.user.role.role_name === 'Admin' && <DashboardViewAdmin usersData={usersQueryData.users} />}
       {state.user.role.role_name === 'Student' && <DashboardViewStudent />}
     </div>
   );

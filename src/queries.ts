@@ -25,7 +25,7 @@ export const CREATE_TASK_ASSIGNATION = gql`
   }
 `;
 
-export const TASK_ASSIGNATIONS = gql`
+export const ASSIGNMENTS = gql`
   query tasksAssignations {
     tasksAssignations {
       _id

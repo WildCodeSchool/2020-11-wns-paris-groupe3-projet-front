@@ -1,8 +1,8 @@
 import React from 'react';
 
-import LinkButton from '../components/LinkButton';
+import LinkButton from 'components/LinkButton';
 
-import { ContainerCenter, Title } from '../styles/data-list';
+import { ContainerCenter, Title } from 'styles/data-list';
 
 interface NoDataProps {
   title: string;

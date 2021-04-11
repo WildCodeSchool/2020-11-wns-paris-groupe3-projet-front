@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 
+import CalendarBody from './CalendarBody';
 import CalendarDailyTasksModal from './CalendarDailyTasksModal';
+import CalendarHeader from './CalendarHeader';
 
-import { TaskAssignation } from '../types';
+import { TaskAssignation } from '../../../../types';
 
-import {
-  CalendarContainer,
-  CalendarHeader,
-  Body,
-  CalendarHeaderPrev,
-  CalendarHeaderNext,
-  Week,
-  Day,
-  DayDiv,
-  DayDivTask,
-  DayNames,
-} from '../styles/calendar';
+import { Container } from '../../../../styles/calendar';
 
 interface CalendarProps {
   assignations: TaskAssignation[];
 }
 
-const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
+export const CalendarContainer = ({ assignations }: CalendarProps): JSX.Element => {
   const [tasksToDisplay, setTasksToDisplay] = useState<TaskAssignation[]>([]);
   const [value, setValue] = useState(moment());
   const [calendar, setCalendar] = useState<Moment[][]>([]);
@@ -97,39 +88,27 @@ const Calendar = ({ assignations }: CalendarProps): JSX.Element => {
 
   return (
     <>
-      <CalendarContainer>
-        <CalendarHeader>
-          <CalendarHeaderPrev onClick={() => setValue(prevMonth())}>{String.fromCharCode(171)}</CalendarHeaderPrev>
-          <div>
-            {currMonthName()} {currYear()}
-          </div>
-          <CalendarHeaderNext onClick={() => setValue(nextMonth())}>{String.fromCharCode(187)}</CalendarHeaderNext>
-        </CalendarHeader>
-        <Body>
-          <DayNames>
-            {daysNames.map((d, i) => (
-              <Week key={i}>{d}</Week>
-            ))}
-          </DayNames>
-          {calendar.map((week, i) => (
-            <div key={i}>
-              {week.map((day: Moment, i) => (
-                <Day key={i} onClick={() => displayTasks(day)}>
-                  <DayDiv isToday={isToday(day)} beforeToday={beforeToday(day)} isSelected={isSelected(day)}>
-                    {day.format('D').toString()}
-                  </DayDiv>
-                  <DayDivTask hasEvent={hasEvent(day)} />
-                </Day>
-              ))}
-            </div>
-          ))}
-        </Body>
-      </CalendarContainer>
+      <Container>
+        <CalendarHeader
+          currMonthName={currMonthName}
+          currYear={currYear}
+          prevMonth={prevMonth}
+          nextMonth={nextMonth}
+          setValue={setValue}
+        />
+        <CalendarBody
+          daysNames={daysNames}
+          calendar={calendar}
+          displayTasks={displayTasks}
+          isToday={isToday}
+          beforeToday={beforeToday}
+          isSelected={isSelected}
+          hasEvent={hasEvent}
+        />
+      </Container>
       {tasksToDisplay.length > 0 && (
         <CalendarDailyTasksModal tasksToDisplay={tasksToDisplay} open={open} handleClose={handleClose} />
       )}
     </>
   );
 };
-
-export default Calendar;

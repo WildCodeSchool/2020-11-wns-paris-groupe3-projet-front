@@ -3,12 +3,12 @@ import { Button, ButtonGroup } from '@material-ui/core/';
 
 import CalendarContainer from './components/Calendar';
 
-import { TaskAssignation } from '../../types';
+import { AssignmentType } from '../../types';
 
 import { Container, ButtonLink } from '../../styles/dashboard';
 
 interface DashboardViewTeacherProps {
-  assignments: TaskAssignation[];
+  assignments: AssignmentType[];
 }
 
 const DashboardViewTeacher = ({ assignments }: DashboardViewTeacherProps): JSX.Element => {

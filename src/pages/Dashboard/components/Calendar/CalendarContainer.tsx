@@ -5,16 +5,16 @@ import CalendarBody from './CalendarBody';
 import CalendarDailyTasksModal from './CalendarDailyTasksModal';
 import CalendarHeader from './CalendarHeader';
 
-import { TaskAssignation } from '../../../../types';
+import { AssignmentType } from '../../../../types';
 
 import { CalendarContainerStyled } from '../../../../styles/calendar';
 
 interface CalendarProps {
-  assignments: TaskAssignation[];
+  assignments: AssignmentType[];
 }
 
 export const CalendarContainer = ({ assignments }: CalendarProps): JSX.Element => {
-  const [tasksToDisplay, setTasksToDisplay] = useState<TaskAssignation[]>([]);
+  const [tasksToDisplay, setTasksToDisplay] = useState<AssignmentType[]>([]);
   const [value, setValue] = useState(moment());
   const [calendar, setCalendar] = useState<Moment[][]>([]);
   const daysNames = ['l', 'm', 'm', 'j', 'v', 's', 'd'];

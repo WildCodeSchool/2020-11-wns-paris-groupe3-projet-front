@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import Header from '../components/Header';
 import TaskAssignationForm from '../components/TaskAssignationForm';
 
-import { NewAssignationType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
+import { NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
 
 const NewAssignation = (): JSX.Element => {
@@ -17,7 +17,7 @@ const NewAssignation = (): JSX.Element => {
   });
   // eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [assignation, setAssignation] = useState<NewAssignationType>({
+  const [assignation, setAssignation] = useState<NewAssignmentType>({
     task: '',
     end_date: new Date().toString(),
     affectedTo: '',

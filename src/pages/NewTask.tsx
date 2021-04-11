@@ -2,10 +2,10 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
 
-import FormUploadFile from '../components/FormUploadFile';
-import Header from '../components/Header';
+import FormUploadFile from 'components/FormUploadFile';
+import Header from 'components/Header';
 
-import { NewTaskType, HandleChange, HandleSubmit } from '../types';
+import { NewTaskType, HandleChange, HandleSubmit } from 'types';
 import { CREATE_TASK } from '../queries';
 
 const NewTask = (): JSX.Element => {

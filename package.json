@@ -53,7 +53,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --modulePaths=src",
     "eject": "react-scripts eject",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",

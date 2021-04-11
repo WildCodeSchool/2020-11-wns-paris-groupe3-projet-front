@@ -3,9 +3,9 @@ import { Button, ButtonGroup } from '@material-ui/core/';
 
 import CalendarContainer from './components/Calendar';
 
-import { AssignmentType } from '../../types';
+import { AssignmentType } from 'types';
 
-import { Container, ButtonLink } from '../../styles/dashboard';
+import { Container, ButtonLink } from 'styles/dashboard';
 
 interface DashboardViewTeacherProps {
   assignments: AssignmentType[];

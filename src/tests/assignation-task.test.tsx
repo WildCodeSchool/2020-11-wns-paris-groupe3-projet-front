@@ -2,8 +2,8 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import NewAssignation from '../pages/NewAssignation';
-import { ALL_TASKS, CLASSROOMS } from '../queries';
+import NewAssignation from 'pages/NewAssignation';
+import { ALL_TASKS, CLASSROOMS } from 'queries';
 
 const ALL_CLASSROOMS_SUCCESS_MOCK = {
   request: {

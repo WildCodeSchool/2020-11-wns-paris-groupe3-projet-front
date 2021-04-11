@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 
 import UploadBox from './UploadBox';
 
-import { FormProps } from '../types';
+import { FormProps } from 'types';
 
 import { TextInput, Form, Error, ButtonForm } from '../styles/form';
 

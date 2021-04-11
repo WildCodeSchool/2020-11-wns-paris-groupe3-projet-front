@@ -5,9 +5,9 @@ import CalendarBody from './CalendarBody';
 import CalendarDailyTasksModal from './CalendarDailyTasksModal';
 import CalendarHeader from './CalendarHeader';
 
-import { AssignmentType } from '../../../../types';
+import { AssignmentType } from 'types';
 
-import { CalendarContainerStyled } from '../../../../styles/calendar';
+import { CalendarContainerStyled } from 'styles/calendar';
 
 interface CalendarProps {
   assignments: AssignmentType[];

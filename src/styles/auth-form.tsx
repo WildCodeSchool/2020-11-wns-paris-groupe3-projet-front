@@ -61,12 +61,6 @@ export const ContainerHomeLogo = styled(Container)`
   }
 `;
 
-export const LogoHome = styled.img`
-  width: 200px;
-  align-self: center;
-  margin: auto;
-`;
-
 export const TitleHome = styled.h1`
   margin: 0;
 `;

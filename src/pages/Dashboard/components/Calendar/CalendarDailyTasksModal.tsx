@@ -2,9 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import { Modal, Backdrop, Fade, ListItem, List, Divider } from '@material-ui/core';
 
-import { TaskAssignation, OnClick } from '../types';
+import { TaskAssignation, OnClick } from '../../../../types';
 
-import { useStyles } from '../styles/modal';
+import { useStyles } from '../../../../styles/modal';
 
 interface CalendarDailyTasksProps {
   tasksToDisplay: TaskAssignation[];

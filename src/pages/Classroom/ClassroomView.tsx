@@ -5,7 +5,7 @@ import ClassroomCard from './components/ClassroomCard';
 
 import { UserType } from '../../types';
 
-interface ClassroomViewProps {
+export interface ClassroomViewProps {
   usersByRole: { teachers: UserType[]; students: UserType[] } | undefined;
 }
 

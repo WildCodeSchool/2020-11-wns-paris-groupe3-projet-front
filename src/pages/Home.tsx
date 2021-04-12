@@ -4,7 +4,7 @@ import { OnClick, HistoryType } from '../types';
 
 import Login from '../components/Login';
 import Register from '../components/Register';
-import logo from '../assets/logoEH.svg';
+import logo from 'assets/logoEH.svg';
 
 import {
   ButtonChangeForm,

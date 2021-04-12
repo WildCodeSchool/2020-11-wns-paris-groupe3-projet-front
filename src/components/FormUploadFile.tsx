@@ -7,6 +7,7 @@ import UploadBox from './UploadBox';
 import { FormProps } from 'types';
 
 import { TextInput, Form, Error, ButtonForm } from 'styles/form';
+import { useStyles } from 'styles/modal';
 
 const FormUploadFile = ({
   file,
@@ -18,10 +19,11 @@ const FormUploadFile = ({
   getInputProps,
   isDragActive,
 }: FormProps): JSX.Element => {
+  const classes = useStyles();
   const fileKey = Object.keys(file)[0];
 
   return (
-    <div>
+    <div className={classes.paper}>
       <Form onSubmit={handleSubmit} aria-label="form">
         {fileKey === 'taskname' && (
           <TextInput id="outlined-basic" label="Titre du devoir" variant="outlined" onChange={handleChange} required />

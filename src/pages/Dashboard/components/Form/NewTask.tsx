@@ -3,7 +3,6 @@ import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
 
 import FormUploadFile from 'components/FormUploadFile';
-import Header from 'components/Header';
 
 import { NewTaskType, HandleChange, HandleSubmit } from 'types';
 import { CREATE_TASK } from 'queries';
@@ -63,19 +62,16 @@ const NewTask = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <Header label="Créer un nouveau devoir" />
-      <FormUploadFile
-        file={task}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        isLoading={isLoading}
-        error={error}
-        getRootProps={getRootProps}
-        getInputProps={getInputProps}
-        isDragActive={isDragActive}
-      />
-    </div>
+    <FormUploadFile
+      file={task}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      isLoading={isLoading}
+      error={error}
+      getRootProps={getRootProps}
+      getInputProps={getInputProps}
+      isDragActive={isDragActive}
+    />
   );
 };
 

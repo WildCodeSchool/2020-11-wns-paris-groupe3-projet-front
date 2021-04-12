@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 
 import CalendarBody from './CalendarBody';
-import CalendarDailyTasksModal from './CalendarDailyTasksModal';
 import CalendarHeader from './CalendarHeader';
+import MyModal from 'components/MyModal';
 
 import { AssignmentType } from 'types';
 
@@ -107,7 +107,12 @@ export const CalendarContainer = ({ assignments }: CalendarProps): JSX.Element =
         />
       </CalendarContainerStyled>
       {tasksToDisplay.length > 0 && (
-        <CalendarDailyTasksModal tasksToDisplay={tasksToDisplay} open={open} handleClose={handleClose} />
+        <MyModal
+          elementToRender={tasksToDisplay}
+          open={open}
+          handleClose={handleClose}
+          renderType="calendar-daily-tasks"
+        />
       )}
     </>
   );

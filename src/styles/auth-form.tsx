@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import theme from '../theme';
+import theme from 'theme';
 
 export const Form = styled.form`
   display: flex;

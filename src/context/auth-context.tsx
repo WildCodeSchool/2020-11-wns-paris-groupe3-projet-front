@@ -7,6 +7,7 @@ type MyToken = {
   email: string;
   firstname: string;
   lastname: string;
+  role: string;
 };
 
 type AuthState = {
@@ -16,6 +17,7 @@ type AuthState = {
     firstname: string;
     lastname: string;
     token: string;
+    role: string;
   };
 };
 
@@ -42,13 +44,13 @@ let initialState = {
     firstname: '',
     lastname: '',
     token: '',
+    role: '',
   },
 };
 
 if (localStorage.getItem('jwtToken')) {
   const token = localStorage.getItem('jwtToken') || '';
   const decodedToken = jwtDecode<MyToken>(localStorage.getItem('jwtToken') || '{}');
-
   if (parseInt(decodedToken.exp) * 1000 < Date.now()) {
     localStorage.removeItem('jwtToken');
   } else {
@@ -58,6 +60,7 @@ if (localStorage.getItem('jwtToken')) {
         email: decodedToken.email,
         firstname: decodedToken.firstname,
         lastname: decodedToken.lastname,
+        role: decodedToken.role,
         token: token,
       },
     };
@@ -74,6 +77,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
           email: action.payload.user.email,
           firstname: action.payload.user.firstname,
           lastname: action.payload.user.lastname,
+          role: action.payload.user.role,
           token: action.payload.user.token,
         },
       };
@@ -85,6 +89,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
           email: '',
           firstname: '',
           lastname: '',
+          role: '',
           token: '',
         },
       };

@@ -51,9 +51,27 @@ export const CLASSROOMS = gql`
         lastname
         email
         speciality {
-          speciality_name
+          _id
         }
         role {
+          _id
+        }
+      }
+    }
+  }
+`;
+
+export const CLASSROOMS_BY_USER_ID = gql`
+  query ClassroomByUserId($_id: ID!) {
+    classroomByUserId(_id: $_id) {
+      _id
+      classname
+      users {
+        _id
+        firstname
+        lastname
+        role {
+          _id
           role_name
         }
       }

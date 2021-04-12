@@ -2,13 +2,13 @@ import React, { useState, useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import { useMutation } from '@apollo/client';
 
-import { HandleChange, HandleSubmit, HistoryType } from '../types';
-import { REGISTER_USER } from '../queries';
-import { AuthContext } from '../context/auth-context';
+import { HandleChange, HandleSubmit, HistoryType } from 'types';
+import { REGISTER_USER } from 'queries';
+import { AuthContext } from 'context/auth-context';
 
 import ErrorList from './ErrorList';
 
-import { TextInput, Form } from '../styles/auth-form';
+import { TextInput, Form } from 'styles/auth-form';
 
 const Register = ({ history }: HistoryType): JSX.Element => {
   const { dispatch } = useContext(AuthContext);

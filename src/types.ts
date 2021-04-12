@@ -2,6 +2,18 @@ import { History, LocationState } from 'history';
 import { DropzoneRootProps, DropzoneInputProps } from 'react-dropzone';
 
 // Objects
+export type UserType = {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  role: RoleType;
+};
+
+export type RoleType = {
+  _id: string;
+  role_name: string;
+};
+
 export type Task = {
   _id: string;
   taskname: string;
@@ -14,14 +26,14 @@ export type Classroom = {
   // users: User;
 };
 
-export type TaskAssignation = {
+export type AssignmentType = {
   _id: string;
   task: Task;
   end_date: Date;
   affectedTo: Classroom;
 };
 
-export type NewAssignationType = {
+export type NewAssignmentType = {
   task: string;
   end_date: string;
   affectedTo: string;

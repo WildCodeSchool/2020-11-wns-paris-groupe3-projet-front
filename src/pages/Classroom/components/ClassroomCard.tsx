@@ -2,9 +2,9 @@ import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import { UserType } from '../../../types';
+import { UserType } from 'types';
 
-import { CardStyled, CardActionAreaStyled, CardMediaStyled } from '../../../styles/classroom';
+import { CardStyled, CardActionAreaStyled, CardMediaStyled } from 'styles/classroom';
 
 interface ClassroomCardProps {
   user: UserType;

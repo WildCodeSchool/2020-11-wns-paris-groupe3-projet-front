@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
 import ClassroomView from './ClassroomView';
-import Header from '../../components/Header';
+import Header from 'components/Header';
 
-import { CLASSROOMS_BY_USER_ID } from '../../queries';
-import { AuthContext } from '../../context/auth-context';
-import { UserType } from '../../types';
+import { CLASSROOMS_BY_USER_ID } from 'queries';
+import { AuthContext } from 'context/auth-context';
+import { UserType } from 'types';
 
 export const ClassroomContainer = (): JSX.Element => {
   const { state } = useContext(AuthContext);

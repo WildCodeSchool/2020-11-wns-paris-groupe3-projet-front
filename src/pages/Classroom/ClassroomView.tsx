@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 import ClassroomCard from './components/ClassroomCard';
 
-import { UserType } from '../../types';
+import { UserType } from 'types';
 
 export interface ClassroomViewProps {
   usersByRole: { teachers: UserType[]; students: UserType[] } | undefined;

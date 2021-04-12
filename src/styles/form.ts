@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { TextField, Button } from '@material-ui/core';
-import theme from '../theme';
+import theme from 'theme';
 
 type ButtonProps = {
   type: string;

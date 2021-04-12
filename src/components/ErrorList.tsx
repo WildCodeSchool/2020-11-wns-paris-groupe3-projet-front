@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ErrorType } from '../types';
+import { ErrorType } from 'types';
 
-import { Error } from '../styles/auth-form';
+import { Error } from 'styles/auth-form';
 
 const ErrorList = ({ errors }: ErrorType): JSX.Element => {
   return (

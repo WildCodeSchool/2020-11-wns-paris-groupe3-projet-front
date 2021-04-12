@@ -26,14 +26,14 @@ export type Classroom = {
   // users: User;
 };
 
-export type TaskAssignation = {
+export type AssignmentType = {
   _id: string;
   task: Task;
   end_date: Date;
   affectedTo: Classroom;
 };
 
-export type NewAssignationType = {
+export type NewAssignmentType = {
   task: string;
   end_date: string;
   affectedTo: string;

@@ -2,10 +2,10 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@testing-library/react';
 
-import ClassroomCard from '../pages/Classroom/components/ClassroomCard';
-import ClassroomView, { ClassroomViewProps } from '../pages/Classroom/ClassroomView';
+import ClassroomCard from 'pages/Classroom/components/ClassroomCard';
+import ClassroomView, { ClassroomViewProps } from 'pages/Classroom/ClassroomView';
 
-import { UserType } from '../types';
+import { UserType } from 'types';
 
 describe('Classroom', () => {
   describe('When on classroom page', () => {

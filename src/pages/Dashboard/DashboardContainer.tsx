@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
 
-import Header from '../../components/Header';
+import Header from 'components/Header';
 import DashboardViewTeacher from './DashboardViewTeacher';
 // import DashboardViewStudent from './DashboardViewStudent';
 // import DashboardViewAdmin from './DashboardViewAdmin';
 
-import { TASK_ASSIGNATIONS } from '../../queries';
-import { AuthContext } from '../../context/auth-context';
+import { TASK_ASSIGNATIONS } from 'queries';
+import { AuthContext } from 'context/auth-context';
 
 export const DashboardContainer = (): JSX.Element => {
   const { state } = useContext(AuthContext);

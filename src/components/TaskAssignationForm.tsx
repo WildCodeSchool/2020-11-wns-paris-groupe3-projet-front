@@ -4,9 +4,9 @@ import 'moment/locale/fr';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import { Task, Classroom, NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
+import { Task, Classroom, NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from 'types';
 
-import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContainer } from '../styles/form';
+import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContainer } from 'styles/form';
 
 interface FormAssignationProps {
   tasks: Task[];

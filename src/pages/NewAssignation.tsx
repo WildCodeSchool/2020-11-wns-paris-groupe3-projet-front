@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import Header from '../components/Header';
-import TaskAssignationForm from '../components/TaskAssignationForm';
+import Header from 'components/Header';
+import TaskAssignationForm from 'components/TaskAssignationForm';
 
-import { NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from '../types';
-import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from '../queries';
-import { AuthContext } from '../context/auth-context';
+import { NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from 'types';
+import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from 'queries';
+import { AuthContext } from 'context/auth-context';
 
 const NewAssignation = (): JSX.Element => {
   const { state } = useContext(AuthContext);

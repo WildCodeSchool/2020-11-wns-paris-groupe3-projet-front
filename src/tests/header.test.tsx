@@ -2,7 +2,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@testing-library/react';
 
-import Header from '../components/Header';
+import Header from 'components/Header';
 
 describe('Header', () => {
   describe('When on all pages', () => {

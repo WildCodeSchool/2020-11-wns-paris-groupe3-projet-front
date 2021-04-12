@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from 'App';
+import reportWebVitals from 'reportWebVitals';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import theme from './theme';
+import theme from 'theme';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_URL,

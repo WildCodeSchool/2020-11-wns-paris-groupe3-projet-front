@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { UploadBoxProps } from '../types';
+import { UploadBoxProps } from 'types';
 
-import { Container, TextHelper, DropZone, CloudUpload, CloudDone } from '../styles/upload-box';
+import { Container, TextHelper, DropZone, CloudUpload, CloudDone } from 'styles/upload-box';
 
 const UploadBox = ({ file, fileType, getRootProps, getInputProps, isDragActive }: UploadBoxProps): JSX.Element => {
   return (

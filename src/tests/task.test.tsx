@@ -2,10 +2,10 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import FormUploadFile from '../components/FormUploadFile';
-import UploadBox from '../components/UploadBox';
+import FormUploadFile from 'components/FormUploadFile';
+import UploadBox from 'components/UploadBox';
 
-import { CREATE_TASK } from '../queries';
+import { CREATE_TASK } from 'queries';
 
 const NEW_TASK_SUCCESS_MOCK = {
   request: {

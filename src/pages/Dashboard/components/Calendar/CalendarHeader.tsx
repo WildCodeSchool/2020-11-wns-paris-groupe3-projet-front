@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CalendarHeaderStyled, CalendarHeaderPrev, CalendarHeaderNext } from '../../../../styles/calendar';
+import { CalendarHeaderStyled, CalendarHeaderPrev, CalendarHeaderNext } from 'styles/calendar';
 
 interface CalendarHeaderProps {
   currMonthName: () => string;

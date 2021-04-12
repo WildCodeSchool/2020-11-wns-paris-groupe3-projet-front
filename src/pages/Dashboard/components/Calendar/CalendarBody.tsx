@@ -1,7 +1,7 @@
 import React from 'react';
 import { Moment } from 'moment';
 
-import { Body, Week, Day, DayDiv, DayDivTask, DayNames } from '../../../../styles/calendar';
+import { Body, Week, Day, DayDiv, DayDivTask, DayNames } from 'styles/calendar';
 
 interface CalendarBodyProps {
   daysNames: string[];

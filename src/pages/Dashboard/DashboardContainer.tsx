@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import Header from '../../components/Header';
+import Header from 'components/Header';
 import DashboardViewTeacher from './DashboardViewTeacher';
 // import DashboardViewStudent from './DashboardViewStudent';
 // import DashboardViewAdmin from './DashboardViewAdmin';
 
-import { TASK_ASSIGNATIONS } from '../../queries';
+import { TASK_ASSIGNATIONS } from 'queries';
 
 export const DashboardContainer = (): JSX.Element => {
   const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
@@ -21,7 +21,7 @@ export const DashboardContainer = (): JSX.Element => {
   return (
     <div>
       <Header label="Tableau de bord" />
-      <DashboardViewTeacher assignations={tasksAssignations} />
+      <DashboardViewTeacher assignments={tasksAssignations} />
       {/* Nav bar */}
     </div>
   );

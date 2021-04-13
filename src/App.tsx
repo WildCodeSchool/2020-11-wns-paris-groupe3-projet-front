@@ -1,13 +1,13 @@
 import React, { useContext, ComponentType } from 'react';
 import { BrowserRouter as Router, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 
-import { AuthProvider, AuthContext } from './context/auth-context';
+import { AuthProvider, AuthContext } from 'context/auth-context';
 
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import NewAssignation from './pages/NewAssignation';
-import NewTask from './pages/NewTask';
-import OnboardingContainer from './pages/Onboarding';
+import Home from 'pages/Home';
+import DashboardContainer from 'pages/Dashboard';
+import NewAssignation from 'pages/NewAssignation';
+import NewTask from 'pages/NewTask';
+import OnboardingContainer from 'pages/Onboarding';
 
 type CompProps = {
   component: ComponentType<RouteComponentProps>;
@@ -27,8 +27,8 @@ const App = (): JSX.Element => {
       <AuthProvider>
         <Route exact path="/" component={Home} />
         <Route exact path="/assignation" component={NewAssignation} />
-        <AuthRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/onboarding" component={OnboardingContainer} />
+        <AuthRoute exact path="/dashboard" component={DashboardContainer} />
         <Route exact path="/task" component={NewTask} />
       </AuthProvider>
     </Router>

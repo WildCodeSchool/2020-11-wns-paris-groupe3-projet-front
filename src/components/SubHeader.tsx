@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SecondHeader } from '../styles/header';
+import { SecondHeader } from 'styles/header';
 
 export interface SubHeaderProps {
   title: string;

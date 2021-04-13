@@ -19,7 +19,7 @@ interface MyModalProps {
 const MyModal = ({ elementToRender, open, handleClose, renderType }: MyModalProps): JSX.Element => {
   const classes = useStyles();
 
-  const ModalContent: any = () => {
+  const ModalContent = () => {
     switch (renderType) {
       case 'calendar-daily-tasks':
         return <CalendarDailyTasks elementToRender={elementToRender} />;
@@ -43,9 +43,7 @@ const MyModal = ({ elementToRender, open, handleClose, renderType }: MyModalProp
         timeout: 500,
       }}
     >
-      <Fade in={open}>
-        <ModalContent />
-      </Fade>
+      <Fade in={open}>{ModalContent()}</Fade>
     </Modal>
   );
 };

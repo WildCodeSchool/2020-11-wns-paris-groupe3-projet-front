@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
 import CloudDoneOutlinedIcon from '@material-ui/icons/CloudDoneOutlined';
-import theme from '../theme';
+import theme from 'theme';
 
 type DropZoneProps = {
   isDragActive: boolean;

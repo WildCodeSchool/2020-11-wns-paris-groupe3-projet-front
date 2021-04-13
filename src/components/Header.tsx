@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FirstHeader } from '../styles/header';
+import { FirstHeader } from 'styles/header';
 interface HeaderProps {
   label: string;
 }

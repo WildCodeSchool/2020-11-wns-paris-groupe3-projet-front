@@ -16,17 +16,26 @@ export const DashboardContainer = (): JSX.Element => {
   );
   const { loading: usersQueryLoading, error: usersQueryError, data: usersQueryData } = useQuery(USERS);
 
+  const getDashBoardView = () => {
+    const { assignments } = assignmentQueryData;
+    const RoleName = state.user.role.role_name;
+    switch (RoleName) {
+      case 'Teacher':
+        return <DashboardViewTeacher assignments={assignments} />;
+      case 'Admin':
+        return <DashboardViewAdmin usersData={usersQueryData.users} />;
+      case 'Student':
+        return <DashboardViewStudent />;
+    }
+  };
+
   if (assignmentQueryLoading || usersQueryLoading) return <p>Loading...</p>;
   if (assignmentQueryError || usersQueryError) return <p>Error...</p>;
-
-  const { assignments } = assignmentQueryData;
 
   return (
     <div>
       <Header label="Tableau de bord" />
-      {state.user.role.role_name === 'Teacher' && <DashboardViewTeacher assignments={assignments} />}
-      {state.user.role.role_name === 'Admin' && <DashboardViewAdmin usersData={usersQueryData.users} />}
-      {state.user.role.role_name === 'Student' && <DashboardViewStudent />}
+      {getDashBoardView()}
     </div>
   );
 };

@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
-export const Container = styled.div`
+export const DataContainer = styled.div`
   margin: 20px;
   height: 80vh;
 `;
 
-export const ContainerCenter = styled.div`
+export const FirstAddDataButtonContainerCenter = styled.div`
   margin: auto;
   width: 30vw;
   position: relative;
@@ -24,10 +24,10 @@ export const Title = styled.p`
   font-size: 1rem;
 `;
 
-export const Delete = styled(DeleteOutlineOutlinedIcon)`
+export const DataDeleteIcon = styled(DeleteOutlineOutlinedIcon)`
   color: red;
 `;
 
-export const Edit = styled(EditOutlinedIcon)`
+export const DataEditIcon = styled(EditOutlinedIcon)`
   color: blue;
 `;

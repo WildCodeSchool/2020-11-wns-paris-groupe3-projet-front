@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
-import { ButtonLink } from '../styles/dashboard';
+import { ButtonLink } from 'styles/dashboard';
 
 interface LinkButtonProps {
   to: string;

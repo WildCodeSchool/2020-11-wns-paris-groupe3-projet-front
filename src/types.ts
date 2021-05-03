@@ -1,4 +1,4 @@
-import { History, LocationState } from 'history';
+import { History, Location } from 'history';
 import { DropzoneRootProps, DropzoneInputProps } from 'react-dropzone';
 
 // Objects
@@ -45,7 +45,7 @@ export type NewCorrectionType = {
 };
 
 export type HistoryType = {
-  history: History<LocationState>;
+  history: History<Location>;
 };
 
 export type ErrorType = {

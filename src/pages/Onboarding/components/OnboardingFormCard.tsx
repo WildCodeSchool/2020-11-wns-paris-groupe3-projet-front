@@ -20,29 +20,29 @@ const OnboardingFormCard = (): JSX.Element => {
   // const [errors, setErrors] = useState({});
   const { dispatch } = useContext(AuthContext);
 
-  const [registerUser] = useMutation(REGISTER_USER, {
-    update(_, { data: { register: user } }) {
-      const userData = { user };
-      dispatch.loginData(userData);
-      // history.push('/dashboard');
-    },
-    variables: { input: userValues },
-    // onError(err) {
-    //   setErrors(err.graphQLErrors[0].extensions?.errors);
-    // },
-  });
+  // const [registerUser] = useMutation(REGISTER_USER, {
+  //   update(_, { data: { register: user } }) {
+  //     const userData = { user };
+  //     dispatch.loginData(userData);
+  //     history.push('/dashboard');
+  //   },
+  //   variables: { input: userValues },
+  //   onError(err) {
+  //     setErrors(err.graphQLErrors[0].extensions?.errors);
+  //   },
+  // });
 
-  const [registerSchool] = useMutation(REGISTER_SCHOOL, {
-    update(_, { data: { register: school } }) {
-      const schoolData = { school };
-      dispatch.loginData(schoolData);
-      // history.push('/dashboard');
-    },
-    variables: { input: schoolValues },
-    // onError(err) {
-    //   setErrors(err.graphQLErrors[0].extensions?.errors);
-    // },
-  });
+  // const [registerSchool] = useMutation(REGISTER_SCHOOL, {
+  //   update(_, { data: { register: school } }) {
+  //     const schoolData = { school };
+  //     dispatch.loginData(schoolData);
+  //     history.push('/dashboard');
+  //   },
+  //   variables: { input: schoolValues },
+  //   onError(err) {
+  //     setErrors(err.graphQLErrors[0].extensions?.errors);
+  //   },
+  // });
 
   const getFormContent = (fields: Array<{ name: string; label: string }>) => {
     return fields.map((field, index) => (

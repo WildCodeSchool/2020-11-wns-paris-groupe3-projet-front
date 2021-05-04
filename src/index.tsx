@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import theme from 'theme';
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_SERVER_URL,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>,
+
   document.getElementById('root'),
 );
 

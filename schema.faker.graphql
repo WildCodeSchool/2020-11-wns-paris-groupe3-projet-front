@@ -1,0 +1,20 @@
+type Task {
+  id: ID
+  title: String! @fake(type: jobTitle)
+  start: String! @fake(type: futureDate)
+  end: String! @fake(type: futureDate)
+}
+
+type Query {
+  allTasks: [Task]
+}
+
+input InputTask {
+  title: String!
+  start: String!
+  end: String!
+}
+
+type Mutation {
+  createTask(input: InputTask): Task
+}

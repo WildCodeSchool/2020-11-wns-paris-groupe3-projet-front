@@ -5,6 +5,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY package.json package.json
 COPY tsconfig.json tsconfig.json
+COPY .env.local .env.local
 RUN npm install
 COPY public public
 COPY src src
@@ -16,6 +17,7 @@ FROM node:14-alpine
 RUN mkdir /app
 WORKDIR /app
 COPY package.json package.json
+COPY .env.local .env.local
 RUN npm install --only=production
 COPY --from=builder /app/build ./build
 RUN npm install -g serve

@@ -1,11 +1,12 @@
 version: '2'
 services:
   app:
+    container_name: easy-homeworks-front-staging
     build:
       context: ./
-      dockerfile: prod.Dockerfile
+      dockerfile: ./Dockerfile.prod
     ports:
-      - 3000:3000
+      - 3000:3001
     volumes:
       - ./src:/app/src
       - ./public:/app/public

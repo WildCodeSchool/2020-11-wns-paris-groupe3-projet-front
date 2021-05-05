@@ -4,7 +4,7 @@ services:
     container_name: easy-homeworks-front-dev
     build:
       context: ./
-      dockerfile: ./infra/dev.Dockerfile
+      dockerfile: ./Dockerfile.dev
     ports:
       - 3000:3000
     volumes:

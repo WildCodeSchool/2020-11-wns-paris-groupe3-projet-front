@@ -1,0 +1,12 @@
+version: '2'
+services:
+  app:
+    container_name: easy-homeworks-front-prod
+    build:
+      context: ./
+      dockerfile: ./infra/prod.Dockerfile
+    ports:
+      - 3000:3001
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public

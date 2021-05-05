@@ -1,7 +1,7 @@
 version: '2'
 services:
   app:
-    container_name: easy-homeworks-front-prod
+    container_name: easy-homeworks-front-staging
     build:
       context: ./
       dockerfile: ./Dockerfile.prod

@@ -17,6 +17,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY package.json package.json
 RUN npm install --only=production
+COPY .env.local .env.local
 COPY --from=builder /app/build ./build
 RUN npm install -g serve
 

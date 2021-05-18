@@ -9,7 +9,6 @@ type ButtonProps = {
 };
 
 export const Form = styled.form`
-  width: 500px;
   margin: auto;
 `;
 
@@ -18,12 +17,12 @@ export const Error = styled.p`
 `;
 
 export const TextInput = styled(TextField)`
-  width: 500px;
+  width: 100%;
   margin: 0.5rem 0 0.5rem 0;
 `;
 
 export const KeyboardDatePickerInput = styled(KeyboardDatePicker)`
-  width: 500px;
+  width: 100%;
   margin: 0.5rem 0 0.5rem 0;
 `;
 

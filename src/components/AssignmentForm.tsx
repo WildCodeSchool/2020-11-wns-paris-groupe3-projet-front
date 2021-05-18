@@ -7,8 +7,9 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Task, Classroom, NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from 'types';
 
 import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContainer } from 'styles/form';
+import { useStyles } from 'styles/modal';
 
-interface FormAssignationProps {
+interface AssignmentFormProps {
   tasks: Task[];
   assignation: NewAssignmentType;
   classrooms: Classroom[];
@@ -19,7 +20,7 @@ interface FormAssignationProps {
   handleSubmit: HandleSubmit;
 }
 
-const TaskAssignationForm = ({
+const AssignmentForm = ({
   tasks,
   assignation,
   classrooms,
@@ -28,9 +29,11 @@ const TaskAssignationForm = ({
   handleChangeTask,
   handleChangeClassroom,
   handleChangeDate,
-}: FormAssignationProps): JSX.Element => {
+}: AssignmentFormProps): JSX.Element => {
+  const classes = useStyles();
+
   return (
-    <Form onSubmit={handleSubmit} aria-label="form">
+    <Form onSubmit={handleSubmit} aria-label="form" className={classes.paper}>
       <Autocomplete
         options={tasks}
         getOptionLabel={(option) => option.taskname}
@@ -69,4 +72,4 @@ const TaskAssignationForm = ({
   );
 };
 
-export default TaskAssignationForm;
+export default AssignmentForm;

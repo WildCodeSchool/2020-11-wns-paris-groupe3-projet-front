@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import Header from 'components/Header';
-import TaskAssignationForm from 'components/TaskAssignationForm';
+import AssignmentForm from 'components/AssignmentForm';
 
 import { NewAssignmentType, HandleChangeAssignation, HandleChangeDate, HandleSubmit } from 'types';
 import { ALL_TASKS, CREATE_TASK_ASSIGNATION, TASK_ASSIGNATIONS, CLASSROOMS } from 'queries';
 
-const NewAssignation = (): JSX.Element => {
+const NewAssignment = (): JSX.Element => {
   const { loading: tasksQueryLoading, error: tasksQueryError, data: tasksQueryData } = useQuery(ALL_TASKS);
   const { loading: classroomsQueryLoading, error: classroomsQueryError, data: classroomsQueryData } = useQuery(
     CLASSROOMS,
@@ -55,20 +54,17 @@ const NewAssignation = (): JSX.Element => {
   const { tasks } = tasksQueryData;
 
   return (
-    <div>
-      <Header label="Assigner un devoir à une classe" />
-      <TaskAssignationForm
-        tasks={tasks}
-        assignation={assignation}
-        classrooms={classrooms}
-        selectedDate={selectedDate}
-        handleChangeTask={handleChangeTask}
-        handleChangeClassroom={handleChangeClassroom}
-        handleChangeDate={handleChangeDate}
-        handleSubmit={handleSubmit}
-      />
-    </div>
+    <AssignmentForm
+      tasks={tasks}
+      assignation={assignation}
+      classrooms={classrooms}
+      selectedDate={selectedDate}
+      handleChangeTask={handleChangeTask}
+      handleChangeClassroom={handleChangeClassroom}
+      handleChangeDate={handleChangeDate}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
-export default NewAssignation;
+export default NewAssignment;

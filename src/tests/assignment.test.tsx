@@ -2,7 +2,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 
-import NewAssignation from 'pages/NewAssignation';
+import NewAssignment from 'pages/Dashboard/components/Form/NewAssignment';
 import { ALL_TASKS, CLASSROOMS } from 'queries';
 
 const ALL_CLASSROOMS_SUCCESS_MOCK = {
@@ -94,7 +94,7 @@ describe('NewAssignation', () => {
     it('renders loading', () => {
       render(
         <MockedProvider mocks={[ALL_CLASSROOMS_SUCCESS_MOCK, ALL_TASKS_SUCCESS_MOCK]} addTypename={false}>
-          <NewAssignation />
+          <NewAssignment />
         </MockedProvider>,
       );
 
@@ -106,7 +106,7 @@ describe('NewAssignation', () => {
     it('renders error', async () => {
       render(
         <MockedProvider mocks={[ALL_CLASSROOMS_ERROR_MOCK, ALL_TASKS_ERROR_MOCK]}>
-          <NewAssignation />
+          <NewAssignment />
         </MockedProvider>,
       );
 

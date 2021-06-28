@@ -65,9 +65,6 @@ export type GetRootProps = (props?: DropzoneRootProps) => DropzoneRootProps;
 export type GetInputProps = (props?: DropzoneInputProps) => DropzoneInputProps;
 
 // Interfaces
-export interface HeaderProps {
-  label: string;
-}
 
 export interface FormProps {
   file: NewTaskType | NewRenderType | NewCorrectionType;

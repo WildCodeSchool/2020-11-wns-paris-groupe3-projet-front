@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
 
 import Header from 'components/Header';
@@ -7,8 +7,10 @@ import DashboardViewTeacher from './DashboardViewTeacher';
 // import DashboardViewAdmin from './DashboardViewAdmin';
 
 import { TASK_ASSIGNATIONS } from 'queries';
+import { AuthContext } from 'context/auth-context';
 
 export const DashboardContainer = (): JSX.Element => {
+  const { state } = useContext(AuthContext);
   const { loading: assignationQueryLoading, error: assignationQueryError, data: assignationQueryData } = useQuery(
     TASK_ASSIGNATIONS,
   );
@@ -20,7 +22,7 @@ export const DashboardContainer = (): JSX.Element => {
 
   return (
     <div>
-      <Header label="Tableau de bord" />
+      <Header label="Tableau de bord" firstname={state.user.firstname} lastname={state.user.lastname} />
       <DashboardViewTeacher assignments={tasksAssignations} />
       {/* Nav bar */}
     </div>

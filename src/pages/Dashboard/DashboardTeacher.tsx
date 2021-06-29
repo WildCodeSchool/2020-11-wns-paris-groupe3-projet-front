@@ -27,7 +27,7 @@ const DashboardTeacher = (): JSX.Element => {
         </ButtonGroup>
       </div>
       <div>
-        <CalendarContainer assignments={data} />
+        <CalendarContainer assignments={data.tasksAssignations} />
       </div>
     </Container>
   );

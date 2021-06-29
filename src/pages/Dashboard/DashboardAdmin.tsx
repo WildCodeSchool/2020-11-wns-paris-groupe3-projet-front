@@ -18,16 +18,12 @@ import { Container } from 'styles/dashboard';
 const DashboardAdmin = (): JSX.Element => {
   const [formattedData, setFormattedData] = useState<FormattedType[]>([]);
 
-  const {
-    loading,
-    error,
-    data: { users },
-  } = useQuery(USERS);
+  const { loading, error, data } = useQuery(USERS);
 
   useEffect(() => {
     const dataTemp: FormattedType[] = [];
-    users &&
-      users.map((d: UserType) => {
+    data &&
+      data.users.map((d: UserType) => {
         return dataTemp.push({
           ...d,
           id: d._id,
@@ -36,7 +32,7 @@ const DashboardAdmin = (): JSX.Element => {
         });
       });
     setFormattedData(dataTemp);
-  }, [users]);
+  }, [loading]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
@@ -46,7 +42,7 @@ const DashboardAdmin = (): JSX.Element => {
       <Header label="Tableau de bord" />
       <Container>
         <SubHeader title="Tous.tes les utilisateurs.trices" />
-        {users.length > 0 && <LinkButton to="/" label="Ajouter un.e nouvel.le utilisateur.rice" color="secondary" />}
+        {data.length > 0 && <LinkButton to="/" label="Ajouter un.e nouvel.le utilisateur.rice" color="secondary" />}
       </Container>
       <DataList columns={columnsUsers} formattedData={formattedData} />
     </div>

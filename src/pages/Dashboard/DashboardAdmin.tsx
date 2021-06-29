@@ -1,27 +1,33 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 
 import DataList from 'components/DataList';
+import Header from 'components/Header';
 import LinkButton from 'components/LinkButton';
 import SubHeader from 'components/SubHeader';
+
+import { USERS } from 'queries';
 
 import { UserType, FormattedType } from 'types';
 import { columnsUsers } from 'utils/colums-data-handler';
 
 import { Container } from 'styles/dashboard';
 
-interface DashboardViewAdminPros {
-  usersData: UserType[];
-}
-
-const DashboardViewAdmin = ({ usersData }: DashboardViewAdminPros): JSX.Element => {
+const DashboardAdmin = (): JSX.Element => {
   const [formattedData, setFormattedData] = useState<FormattedType[]>([]);
+
+  const {
+    loading,
+    error,
+    data: { users },
+  } = useQuery(USERS);
 
   useEffect(() => {
     const dataTemp: FormattedType[] = [];
-    usersData &&
-      usersData.map((d: UserType) => {
+    users &&
+      users.map((d: UserType) => {
         return dataTemp.push({
           ...d,
           id: d._id,
@@ -30,19 +36,21 @@ const DashboardViewAdmin = ({ usersData }: DashboardViewAdminPros): JSX.Element 
         });
       });
     setFormattedData(dataTemp);
-  }, [usersData]);
+  }, [users]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
 
   return (
     <div>
+      <Header label="Tableau de bord" />
       <Container>
         <SubHeader title="Tous.tes les utilisateurs.trices" />
-        {usersData.length > 0 && (
-          <LinkButton to="/" label="Ajouter un.e nouvel.le utilisateur.rice" color="secondary" />
-        )}
+        {users.length > 0 && <LinkButton to="/" label="Ajouter un.e nouvel.le utilisateur.rice" color="secondary" />}
       </Container>
       <DataList columns={columnsUsers} formattedData={formattedData} />
     </div>
   );
 };
 
-export default DashboardViewAdmin;
+export default DashboardAdmin;

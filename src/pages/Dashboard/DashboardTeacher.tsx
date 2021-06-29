@@ -1,17 +1,19 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import { Button, ButtonGroup } from '@material-ui/core/';
 
 import CalendarContainer from './components/Calendar';
 
-import { AssignmentType } from 'types';
+import { ASSIGNMENTS } from 'queries';
 
 import { Container, ButtonLink } from 'styles/dashboard';
 
-interface DashboardViewTeacherProps {
-  assignments: AssignmentType[];
-}
+const DashboardTeacher = (): JSX.Element => {
+  const { loading, error, data } = useQuery(ASSIGNMENTS);
 
-const DashboardViewTeacher = ({ assignments }: DashboardViewTeacherProps): JSX.Element => {
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
+
   return (
     <Container>
       <div>
@@ -25,10 +27,10 @@ const DashboardViewTeacher = ({ assignments }: DashboardViewTeacherProps): JSX.E
         </ButtonGroup>
       </div>
       <div>
-        <CalendarContainer assignments={assignments} />
+        <CalendarContainer assignments={data} />
       </div>
     </Container>
   );
 };
 
-export default DashboardViewTeacher;
+export default DashboardTeacher;

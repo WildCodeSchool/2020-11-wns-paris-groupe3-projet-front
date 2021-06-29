@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { OnClick, HistoryType } from 'types';
+import { OnClick } from 'types';
 
 import Login from 'components/Login';
 import Register from 'components/Register';
@@ -15,7 +15,7 @@ import {
   TitleHome,
 } from 'styles/auth-form';
 
-const Home = ({ history }: HistoryType): JSX.Element => {
+const Home = (): JSX.Element => {
   const [alreadyRegister, setAlreadyRegister] = useState(true);
 
   const displayForm: OnClick = (e) => {
@@ -30,7 +30,7 @@ const Home = ({ history }: HistoryType): JSX.Element => {
         <ButtonChangeForm type="button" onClick={displayForm}>
           {alreadyRegister ? 'Pas encore inscrit ?' : 'Déjà inscrit ?'}
         </ButtonChangeForm>
-        <div>{alreadyRegister ? <Login history={history} /> : <Register history={history} />}</div>
+        <div>{alreadyRegister ? <Login /> : <Register />}</div>
       </ContainerHomeForm>
       <ContainerHomeLogo>
         <LogoHome src={logo} alt="Logo" />

@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    container_name: easy-homeworks-front-prod
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - ${GATEWAY_PORT}:3000
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    environment: 
+      - REACT_APP_SERVER_URL="https://easyhomeworks.wns.wilders.dev/graphql/"

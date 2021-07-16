@@ -25,7 +25,7 @@ export const CREATE_TASK_ASSIGNATION = gql`
   }
 `;
 
-export const TASK_ASSIGNATIONS = gql`
+export const ASSIGNMENTS = gql`
   query tasksAssignations {
     tasksAssignations {
       _id
@@ -102,6 +102,9 @@ export const LOGIN_USER = gql`
       email
       creation_date
       token
+      role {
+        role_name
+      }
     }
   }
 `;
@@ -115,6 +118,21 @@ export const REGISTER_USER = gql`
       email
       creation_date
       token
+    }
+  }
+`;
+
+export const USERS = gql`
+  query users {
+    users {
+      _id
+      firstname
+      lastname
+      role {
+        role_name
+      }
+      creation_date
+      status
     }
   }
 `;

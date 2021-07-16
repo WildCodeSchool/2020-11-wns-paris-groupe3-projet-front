@@ -10,7 +10,7 @@ import { TextInput, Form, KeyboardDatePickerInput, ButtonForm, ButtonFormContain
 
 interface FormAssignationProps {
   tasks: Task[];
-  assignation: NewAssignmentType;
+  assignment: NewAssignmentType;
   classrooms: Classroom[];
   selectedDate: Date;
   handleChangeTask: HandleChangeAssignation;
@@ -21,7 +21,7 @@ interface FormAssignationProps {
 
 const TaskAssignationForm = ({
   tasks,
-  assignation,
+  assignment,
   classrooms,
   selectedDate,
   handleSubmit,
@@ -61,7 +61,7 @@ const TaskAssignationForm = ({
       </MuiPickersUtilsProvider>
       <ButtonFormContainer>
         <ButtonForm type="button">Annuler</ButtonForm>
-        <ButtonForm type="submit" disabled={assignation.task.length === 0 || assignation.affectedTo.length === 0}>
+        <ButtonForm type="submit" disabled={assignment.task.length === 0 || assignment.affectedTo.length === 0}>
           Valider
         </ButtonForm>
       </ButtonFormContainer>

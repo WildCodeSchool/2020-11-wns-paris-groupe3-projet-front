@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useMutation } from '@apollo/client';
 
-import { HandleChange, HandleSubmit, HistoryType } from 'types';
+import { HandleChange, HandleSubmit } from 'types';
 import { LOGIN_USER } from 'queries';
 import { AuthContext } from 'context/auth-context';
 
@@ -10,7 +11,8 @@ import ErrorList from './ErrorList';
 
 import { TextInput, Form } from 'styles/auth-form';
 
-const Login = ({ history }: HistoryType): JSX.Element => {
+const Login = (): JSX.Element => {
+  const history = useHistory();
   const { dispatch } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
@@ -18,14 +20,16 @@ const Login = ({ history }: HistoryType): JSX.Element => {
     password: '',
   });
 
-  const [login] = useMutation(LOGIN_USER, {
-    update(_, { data: { login: userData } }) {
-      dispatch.loginData({ user: userData });
-      history.push('/dashboard');
-    },
+  const [login, { loading }] = useMutation(LOGIN_USER, {
     variables: values,
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions?.errors || err);
+    },
+    onCompleted({ login }) {
+      dispatch.loginData({ user: login });
+      login.role.role_name === 'Admin' && history.push('/admin/dashboard');
+      login.role.role_name === 'Student' && history.push('/student/dashboard');
+      login.role.role_name === 'Teacher' && history.push('/teacher/dashboard');
     },
   });
 
@@ -39,11 +43,13 @@ const Login = ({ history }: HistoryType): JSX.Element => {
     login();
   };
 
+  if (loading) return <p>Loading</p>;
+
   return (
-    <Form onSubmit={onSubmit}>
+    <Form>
       <TextInput label="Email" variant="outlined" name="email" type="email" onChange={onChange} />
       <TextInput label="Mot de passe" variant="outlined" name="password" type="password" onChange={onChange} />
-      <Button variant="contained" color="primary" type="submit">
+      <Button onClick={(e: any) => onSubmit(e)} variant="contained" color="primary" type="button">
         Connexion
       </Button>
       {Object.keys(errors).length > 0 && <ErrorList errors={errors} />}

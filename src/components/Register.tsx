@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useMutation } from '@apollo/client';
 
-import { HandleChange, HandleSubmit, HistoryType } from 'types';
+import { HandleChange, HandleSubmit } from 'types';
 import { REGISTER_USER } from 'queries';
 import { AuthContext } from 'context/auth-context';
 
@@ -10,7 +11,8 @@ import ErrorList from './ErrorList';
 
 import { TextInput, Form } from 'styles/auth-form';
 
-const Register = ({ history }: HistoryType): JSX.Element => {
+const Register = (): JSX.Element => {
+  const history = useHistory();
   const { dispatch } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
@@ -21,15 +23,16 @@ const Register = ({ history }: HistoryType): JSX.Element => {
     confirmPassword: '',
   });
 
-  const [register] = useMutation(REGISTER_USER, {
-    update(_, { data: { register: user } }) {
-      const userData = { user };
-      dispatch.loginData(userData);
-      history.push('/dashboard');
-    },
+  const [register, { loading }] = useMutation(REGISTER_USER, {
     variables: { input: values },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions?.errors);
+    },
+    onCompleted({ register }) {
+      dispatch.loginData({ user: register });
+      register.role.role_name === 'Admin' && history.push('/admin/dashboard');
+      register.role.role_name === 'Student' && history.push('/student/dashboard');
+      register.role.role_name === 'Teacher' && history.push('/teacher/dashboard');
     },
   });
 
@@ -42,6 +45,8 @@ const Register = ({ history }: HistoryType): JSX.Element => {
     setErrors({});
     register();
   };
+
+  if (loading) return <p>Loading</p>;
 
   return (
     <Form onSubmit={onSubmit}>

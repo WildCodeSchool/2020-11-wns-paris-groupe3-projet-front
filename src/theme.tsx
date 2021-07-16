@@ -1,22 +1,26 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
+import { frFR } from '@material-ui/data-grid';
 
 // A custom theme for this app
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#EC982F',
-    },
-    secondary: {
-      main: '#609890',
-    },
-    error: {
-      main: red.A400,
-    },
-    background: {
-      default: '#fff',
+const theme = createMuiTheme(
+  {
+    palette: {
+      primary: {
+        main: '#EC982F',
+      },
+      secondary: {
+        main: '#609890',
+      },
+      error: {
+        main: red.A400,
+      },
+      background: {
+        default: '#fff',
+      },
     },
   },
-});
+  frFR,
+);
 
 export default theme;

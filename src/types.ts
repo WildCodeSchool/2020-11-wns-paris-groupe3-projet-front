@@ -52,6 +52,30 @@ export type ErrorType = {
   errors: { [key: string]: string };
 };
 
+export type RoleType = {
+  _id: string;
+  role_name: string;
+};
+
+export type UserType = {
+  _id: string;
+  id: string;
+  firstname: string;
+  lastname: string;
+  role: RoleType;
+  creation_date: string;
+  status: boolean;
+};
+
+export type FormattedType = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  role: string;
+  creation_date: string;
+  status: boolean;
+};
+
 // Functions
 export type HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => void;
 export type HandleChangeDate = (e: React.ChangeEvent<HTMLInputElement> | Date | null) => void;
@@ -65,10 +89,6 @@ export type GetRootProps = (props?: DropzoneRootProps) => DropzoneRootProps;
 export type GetInputProps = (props?: DropzoneInputProps) => DropzoneInputProps;
 
 // Interfaces
-export interface HeaderProps {
-  label: string;
-}
-
 export interface FormProps {
   file: NewTaskType | NewRenderType | NewCorrectionType;
   handleChange: HandleChange;
